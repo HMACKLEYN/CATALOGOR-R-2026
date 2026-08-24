@@ -5,6 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Catálogo Materas de Cemento | Rocks & Roots</title>
   
+  <!-- CSS para Zoom -->
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/medium-zoom@1.0.6/dist/style.css">
   
   <style>
@@ -31,6 +32,7 @@
       margin-bottom: 6px;
       text-align: center;
       font-weight: 600;
+      letter-spacing: 0.5px;
     }
 
     .zoom-hint {
@@ -57,7 +59,7 @@
 
     .page {
       background-color: #ffffff;
-      position: relative; /* Permite posicionar botones invisibles sobre la página */
+      position: relative;
     }
 
     .page img {
@@ -68,33 +70,29 @@
       cursor: zoom-in;
     }
 
-    /* ESTILOS PARA LOS BOTONES INVISIBLES DEL ÍNDICE */
+    /* Recuadros del índice interactivo */
     .index-link {
       position: absolute;
-      background: rgba(46, 90, 68, 0.15); /* Color suave para identificar la zona (cámbialo a 'transparent' cuando esté ajustado) */
-      border: 1px dashed #2e5a44;
-      border-radius: 6px;
+      background: transparent;
       cursor: pointer;
-      transition: background 0.2s ease;
       z-index: 10;
-    }
-
-    .index-link:hover {
-      background: rgba(46, 90, 68, 0.35);
     }
 
     .controls {
       display: flex;
       justify-content: center;
-      gap: 15px;
+      align-items: center;
+      gap: 12px;
       width: 100%;
+      flex-wrap: wrap;
     }
 
+    /* Botones principales (Anterior / Siguiente) */
     .btn {
       background: #2e5a44;
       color: #ffffff;
       border: none;
-      padding: 12px 26px;
+      padding: 12px 24px;
       border-radius: 25px;
       font-weight: 600;
       font-size: 0.95rem;
@@ -108,6 +106,25 @@
       transform: translateY(-2px);
     }
 
+    /* Botón secundario para Pantalla Completa */
+    .btn-fullscreen {
+      background: #ffffff;
+      color: #2e5a44;
+      border: 1.5px solid #2e5a44;
+      padding: 11px 16px;
+      border-radius: 25px;
+      font-weight: 600;
+      font-size: 0.9rem;
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+
+    .btn-fullscreen:hover {
+      background: #2e5a44;
+      color: #ffffff;
+    }
+
+    /* Zoom modal overlays */
     .medium-zoom-overlay {
       background-color: rgba(0, 0, 0, 0.88) !important;
       z-index: 9999;
@@ -130,6 +147,10 @@
         padding: 10px 20px;
         font-size: 0.9rem;
       }
+      .btn-fullscreen {
+        padding: 9px 14px;
+        font-size: 0.85rem;
+      }
     }
   </style>
 </head>
@@ -141,20 +162,18 @@
   <div class="flipbook-container">
     <div id="flipbook">
       
-      <!-- Página 1: Portada -->
+      <!-- Portada -->
       <div class="page"><img src="PAGINA-01.png" alt="Portada" class="zoomable"></div>
       
-      <!-- Página 2: ÍNDICE INTERACTIVO -->
+      <!-- Índice Interactivo -->
       <div class="page">
         <img src="PAGINA-02.png" alt="Índice" class="zoomable">
-        
-        <!-- Enlaces a secciones (Ajusta 'top', 'left', 'width' y 'height' según el diseño de tu índice) -->
         <div class="index-link" style="top: 30%; left: 10%; width: 80%; height: 8%;" data-page="2" title="Ir a Materas Acanaladas"></div>
         <div class="index-link" style="top: 40%; left: 10%; width: 80%; height: 8%;" data-page="4" title="Ir a Materas Lisas"></div>
         <div class="index-link" style="top: 50%; left: 10%; width: 80%; height: 8%;" data-page="6" title="Ir a Bases y Platos"></div>
       </div>
 
-      <!-- Páginas del catálogo -->
+      <!-- Páginas -->
       <div class="page"><img src="PAGINA-03.png" alt="Página 3" class="zoomable"></div>
       <div class="page"><img src="PAGINA-04.png" alt="Página 4" class="zoomable"></div>
       <div class="page"><img src="PAGINA-05.png" alt="Página 5" class="zoomable"></div>
@@ -168,11 +187,14 @@
     </div>
   </div>
 
+  <!-- Botones de Navegación + Pantalla Completa -->
   <div class="controls">
     <button class="btn" id="prev">❮ Anterior</button>
+    <button class="btn-fullscreen" id="fullscreen-btn" title="Pantalla completa">⛶ Pantalla Completa</button>
     <button class="btn" id="next">Siguiente ❯</button>
   </div>
 
+  <!-- Scripts -->
   <script src="https://cdn.jsdelivr.net/npm/page-flip/dist/js/page-flip.browser.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/medium-zoom@1.0.6/dist/medium-zoom.min.js"></script>
 
@@ -201,15 +223,39 @@
       document.getElementById('prev').addEventListener('click', () => pageFlip.flipPrev());
       document.getElementById('next').addEventListener('click', () => pageFlip.flipNext());
 
-      // PROGRAMACIÓN DE CLICS EN EL ÍNDICE
+      // LÓGICA DE PANTALLA COMPLETA
+      const fullscreenBtn = document.getElementById('fullscreen-btn');
+      fullscreenBtn.addEventListener('click', () => {
+        if (!document.fullscreenElement) {
+          document.documentElement.requestFullscreen().catch(err => {
+            console.log(`Error al intentar activar pantalla completa: ${err.message}`);
+          });
+          fullscreenBtn.textContent = '✕ Salir';
+        } else {
+          if (document.exitFullscreen) {
+            document.exitFullscreen();
+            fullscreenBtn.textContent = '⛶ Pantalla Completa';
+          }
+        }
+      });
+
+      // Evento para actualizar texto del botón si el usuario sale con la tecla ESC
+      document.addEventListener('fullscreenchange', () => {
+        if (!document.fullscreenElement) {
+          fullscreenBtn.textContent = '⛶ Pantalla Completa';
+        }
+      });
+
+      // Clics del índice
       document.querySelectorAll('.index-link').forEach(link => {
         link.addEventListener('click', (e) => {
-          e.stopPropagation(); // Evita que abra el zoom al tocar el botón del índice
+          e.stopPropagation();
           const targetPage = parseInt(link.getAttribute('data-page'));
-          pageFlip.flip(targetPage); // Lleva al usuario a la página especificada
+          pageFlip.flip(targetPage);
         });
       });
 
+      // Zoom aislado
       const zoom = mediumZoom('.zoomable', {
         margin: 16,
         background: 'rgba(0, 0, 0, 0.88)',
