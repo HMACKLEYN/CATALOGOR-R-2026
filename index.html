@@ -5,8 +5,6 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Catálogo Materas de Cemento | Rocks & Roots</title>
   
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/medium-zoom@1.0.6/dist/style.css">
-  
   <style>
     * {
       box-sizing: border-box;
@@ -82,14 +80,13 @@
       align-items: center;
       gap: 12px;
       width: 100%;
-      flex-wrap: wrap;
     }
 
     .btn {
       background: #2e5a44;
       color: #ffffff;
       border: none;
-      padding: 12px 24px;
+      padding: 12px 28px;
       border-radius: 25px;
       font-weight: 600;
       font-size: 0.95rem;
@@ -103,50 +100,13 @@
       transform: translateY(-2px);
     }
 
-    .btn-fullscreen {
-      background: #ffffff;
-      color: #2e5a44;
-      border: 1.5px solid #2e5a44;
-      padding: 11px 16px;
-      border-radius: 25px;
-      font-weight: 600;
-      font-size: 0.9rem;
-      cursor: pointer;
-      transition: all 0.2s ease;
-    }
-
-    .btn-fullscreen:hover {
-      background: #2e5a44;
-      color: #ffffff;
-    }
-
-    .medium-zoom-overlay {
-      background-color: rgba(0, 0, 0, 0.88) !important;
-      z-index: 9999;
-    }
-
-    .medium-zoom-image--opened {
-      z-index: 10000;
-      cursor: zoom-out !important;
-    }
-
-    .disabled-flipbook {
-      pointer-events: none !important;
-      user-select: none !important;
-      touch-action: none !important;
-    }
-
     @media (max-width: 600px) {
       .catalog-title {
         font-size: 1.2rem;
       }
       .btn {
-        padding: 10px 20px;
+        padding: 10px 22px;
         font-size: 0.9rem;
-      }
-      .btn-fullscreen {
-        padding: 9px 14px;
-        font-size: 0.85rem;
       }
     }
   </style>
@@ -154,7 +114,7 @@
 <body>
 
   <h1 class="catalog-title">Catálogo Materas de Cemento</h1>
-  <p class="zoom-hint">🔍 Haz doble clic / doble toque en la imagen para ampliar</p>
+  <p class="zoom-hint">🔍 Haz doble clic / doble toque para abrir la imagen en alta calidad</p>
 
   <div class="flipbook-container">
     <div id="flipbook">
@@ -183,18 +143,15 @@
 
   <div class="controls">
     <button class="btn" id="prev">❮ Anterior</button>
-    <button class="btn-fullscreen" id="fullscreen-btn" title="Pantalla completa">⛶ Pantalla Completa</button>
     <button class="btn" id="next">Siguiente ❯</button>
   </div>
 
   <script src="https://cdn.jsdelivr.net/npm/page-flip/dist/js/page-flip.browser.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/medium-zoom@1.0.6/dist/medium-zoom.min.js"></script>
 
   <script>
     document.addEventListener('DOMContentLoaded', function() {
       const screenWidth = window.innerWidth;
       const initialSize = screenWidth < 550 ? Math.min(screenWidth - 40, 480) : 500;
-      const flipbookContainer = document.querySelector('.flipbook-container');
       const flipbookElem = document.getElementById('flipbook');
 
       const pageFlip = new St.PageFlip(flipbookElem, {
@@ -216,28 +173,6 @@
       document.getElementById('prev').addEventListener('click', () => pageFlip.flipPrev());
       document.getElementById('next').addEventListener('click', () => pageFlip.flipNext());
 
-      // Pantalla Completa
-      const fullscreenBtn = document.getElementById('fullscreen-btn');
-      fullscreenBtn.addEventListener('click', () => {
-        if (!document.fullscreenElement) {
-          document.documentElement.requestFullscreen().catch(err => {
-            console.log(`Error al intentar activar pantalla completa: ${err.message}`);
-          });
-          fullscreenBtn.textContent = '✕ Salir';
-        } else {
-          if (document.exitFullscreen) {
-            document.exitFullscreen();
-            fullscreenBtn.textContent = '⛶ Pantalla Completa';
-          }
-        }
-      });
-
-      document.addEventListener('fullscreenchange', () => {
-        if (!document.fullscreenElement) {
-          fullscreenBtn.textContent = '⛶ Pantalla Completa';
-        }
-      });
-
       // Clics del índice
       document.querySelectorAll('.index-link').forEach(link => {
         link.addEventListener('click', (e) => {
@@ -247,56 +182,31 @@
         });
       });
 
-      // Instancia de Zoom sin elementos adjuntos de inicio
-      const zoom = mediumZoom({
-        margin: 16,
-        background: 'rgba(0, 0, 0, 0.88)',
-        scrollOffset: 0
-      });
-
-      let currentZoomedImg = null;
-
-      function triggerZoom(imgElement) {
-        if (currentZoomedImg) {
-          zoom.detach(currentZoomedImg);
-        }
-        currentZoomedImg = imgElement;
-        zoom.attach(imgElement);
-        zoom.open();
-      }
-
-      // Event Listener Global mediante delegación para capturar imágenes en cualquier hoja (incluso clonadas)
+      // LÓGICA DE ABRIR EN NUEVA PESTAÑA CON DOBLE CLIC / DOBLE TAP
       let lastTap = 0;
 
+      function openImageInNewTab(imgSrc) {
+        window.open(imgSrc, '_blank');
+      }
+
+      // Doble Clic (PC)
       flipbookElem.addEventListener('dblclick', (e) => {
         if (e.target.tagName === 'IMG' && e.target.classList.contains('zoomable')) {
           e.stopPropagation();
-          triggerZoom(e.target);
+          openImageInNewTab(e.target.src);
         }
       });
 
+      // Doble Tap (Móvil)
       flipbookElem.addEventListener('touchend', (e) => {
         if (e.target.tagName === 'IMG' && e.target.classList.contains('zoomable')) {
           const currentTime = new Date().getTime();
           const tapLength = currentTime - lastTap;
           if (tapLength < 300 && tapLength > 0) {
             e.stopPropagation();
-            triggerZoom(e.target);
+            openImageInNewTab(e.target.src);
           }
           lastTap = currentTime;
-        }
-      });
-
-      // Eventos de estado de zoom
-      zoom.on('open', () => {
-        flipbookContainer.classList.add('disabled-flipbook');
-      });
-
-      zoom.on('closed', () => {
-        flipbookContainer.classList.remove('disabled-flipbook');
-        if (currentZoomedImg) {
-          zoom.detach(currentZoomedImg);
-          currentZoomedImg = null;
         }
       });
     });
