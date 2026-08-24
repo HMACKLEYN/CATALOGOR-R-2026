@@ -3,66 +3,57 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Catálogo Rocks & Roots Design</title>
+  <title>Catálogo Materas de Cemento | Rocks & Roots</title>
   <style>
     * {
       box-sizing: border-box;
       margin: 0;
       padding: 0;
     }
-
     body {
       background-color: #1a1e24;
-      color: #ffffff;
-      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
       display: flex;
       flex-direction: column;
       justify-content: center;
       align-items: center;
       min-height: 100vh;
-      overflow-x: hidden;
-      padding: 20px 10px;
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      padding: 20px 0;
     }
-
+    
     .catalog-title {
-      margin-bottom: 20px;
+      color: #ffffff;
       font-size: 1.5rem;
+      margin-bottom: 25px;
+      text-align: center;
       font-weight: 600;
       letter-spacing: 0.5px;
-      color: #e2e8f0;
-      text-align: center;
     }
 
     .flipbook-container {
-      position: relative;
       display: flex;
       justify-content: center;
       align-items: center;
+      width: 100%;
+      margin-bottom: 25px;
     }
 
     #flipbook {
-      box-shadow: 0 15px 35px rgba(0, 0, 0, 0.5);
-      border-radius: 4px;
-      overflow: hidden;
-    }
-
-    .page {
-      background-color: #ffffff;
-      overflow: hidden;
+      box-shadow: 0 15px 35px rgba(0,0,0,0.5);
     }
 
     .page img {
       width: 100%;
       height: 100%;
-      object-fit: cover;
-      display: block;
+      object-fit: contain; /* Garantiza que la imagen no se corte */
+      background-color: #1a1e24;
     }
 
     .controls {
-      margin-top: 25px;
       display: flex;
-      gap: 16px;
-      align-items: center;
+      justify-content: center;
+      gap: 15px;
+      width: 100%;
     }
 
     .btn {
@@ -70,45 +61,27 @@
       color: #ffffff;
       border: none;
       padding: 12px 24px;
-      border-radius: 30px;
-      font-size: 0.95rem;
+      border-radius: 25px;
       font-weight: 600;
+      font-size: 0.95rem;
       cursor: pointer;
-      transition: all 0.2s ease;
       box-shadow: 0 4px 12px rgba(49, 130, 206, 0.3);
-      display: flex;
-      align-items: center;
-      gap: 8px;
+      transition: all 0.2s ease;
     }
 
     .btn:hover {
       background: #2b6cb0;
       transform: translateY(-2px);
-      box-shadow: 0 6px 16px rgba(49, 130, 206, 0.4);
-    }
-
-    .btn:active {
-      transform: translateY(0);
-    }
-
-    /* Ajustes para móviles */
-    @media (max-width: 600px) {
-      .catalog-title {
-        font-size: 1.2rem;
-      }
-      .btn {
-        padding: 10px 18px;
-        font-size: 0.85rem;
-      }
     }
   </style>
 </head>
 <body>
 
-  <h1 class="catalog-title">Catálogo Interactivo</h1>
+  <!-- Título principal -->
+  <h1 class="catalog-title">Catálogo Materas de Cemento</h1>
 
+  <!-- Contenedor del Flipbook -->
   <div class="flipbook-container">
-<div class="flipbook-container">
     <div id="flipbook">
       <div class="page"><img src="PAGINA-01.png" alt="Portada"></div>
       <div class="page"><img src="PAGINA-02.png" alt="Página 2"></div>
@@ -124,45 +97,34 @@
     </div>
   </div>
 
+  <!-- Botones de navegación (Aparecen abajo centrados) -->
   <div class="controls">
     <button class="btn" id="prev">❮ Anterior</button>
     <button class="btn" id="next">Siguiente ❯</button>
   </div>
 
-  <!-- Librería StPageFlip -->
+  <!-- Script de configuración -->
   <script src="https://cdn.jsdelivr.net/npm/page-flip/dist/js/page-flip.browser.js"></script>
-
   <script>
     document.addEventListener('DOMContentLoaded', function() {
-      const pageFlip = new St.PageFlip(
-        document.getElementById('flipbook'),
-        {
-          width: 400,          // Ancho base de cada hoja en px
-          height: 550,         // Alto base de cada hoja en px
-          size: 'fixed',
-          minWidth: 280,
-          maxWidth: 1000,
-          minHeight: 380,
-          maxHeight: 1400,
-          drawShadow: true,    // Sombras tridimensionales al pasar hoja
-          showCover: true,     // La primera hoja se muestra como portada individual
-          usePortrait: true    // En celulares cambia automáticamente a 1 sola hoja
-        }
-      );
+      const pageFlip = new St.PageFlip(document.getElementById('flipbook'), {
+        width: 500, // Dimensión cuadrada para imágenes 1080x1080 px (1:1)
+        height: 500,
+        size: 'fixed',
+        minWidth: 300,
+        maxWidth: 700,
+        minHeight: 300,
+        maxHeight: 700,
+        drawShadow: true,
+        showCover: true,
+        usePortrait: true
+      });
 
-      // Cargar hojas del flipbook
       pageFlip.loadFromHTML(document.querySelectorAll('#flipbook .page'));
 
-      // Asignar eventos a los botones
-      document.getElementById('prev').addEventListener('click', () => {
-        pageFlip.flipPrev();
-      });
-
-      document.getElementById('next').addEventListener('click', () => {
-        pageFlip.flipNext();
-      });
+      document.getElementById('prev').addEventListener('click', () => pageFlip.flipPrev());
+      document.getElementById('next').addEventListener('click', () => pageFlip.flipNext());
     });
   </script>
-
 </body>
 </html>
