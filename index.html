@@ -5,7 +5,6 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Catálogo Materas de Cemento | Rocks & Roots</title>
   
-  <!-- CSS para Zoom -->
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/medium-zoom@1.0.6/dist/style.css">
   
   <style>
@@ -67,10 +66,9 @@
       height: 100%;
       object-fit: contain;
       display: block;
-      cursor: zoom-in;
+      cursor: pointer;
     }
 
-    /* Recuadros del índice interactivo */
     .index-link {
       position: absolute;
       background: transparent;
@@ -87,7 +85,6 @@
       flex-wrap: wrap;
     }
 
-    /* Botones principales (Anterior / Siguiente) */
     .btn {
       background: #2e5a44;
       color: #ffffff;
@@ -106,7 +103,6 @@
       transform: translateY(-2px);
     }
 
-    /* Botón secundario para Pantalla Completa */
     .btn-fullscreen {
       background: #ffffff;
       color: #2e5a44;
@@ -124,7 +120,6 @@
       color: #ffffff;
     }
 
-    /* Zoom modal overlays */
     .medium-zoom-overlay {
       background-color: rgba(0, 0, 0, 0.88) !important;
       z-index: 9999;
@@ -157,15 +152,13 @@
 <body>
 
   <h1 class="catalog-title">Catálogo Materas de Cemento</h1>
-  <p class="zoom-hint">🔍 Toca o haz clic en la imagen para ampliar</p>
+  <p class="zoom-hint">🔍 Haz doble clic / doble toque en la imagen para ampliar</p>
 
   <div class="flipbook-container">
     <div id="flipbook">
       
-      <!-- Portada -->
       <div class="page"><img src="PAGINA-01.png" alt="Portada" class="zoomable"></div>
       
-      <!-- Índice Interactivo -->
       <div class="page">
         <img src="PAGINA-02.png" alt="Índice" class="zoomable">
         <div class="index-link" style="top: 30%; left: 10%; width: 80%; height: 8%;" data-page="2" title="Ir a Materas Acanaladas"></div>
@@ -173,7 +166,6 @@
         <div class="index-link" style="top: 50%; left: 10%; width: 80%; height: 8%;" data-page="6" title="Ir a Bases y Platos"></div>
       </div>
 
-      <!-- Páginas -->
       <div class="page"><img src="PAGINA-03.png" alt="Página 3" class="zoomable"></div>
       <div class="page"><img src="PAGINA-04.png" alt="Página 4" class="zoomable"></div>
       <div class="page"><img src="PAGINA-05.png" alt="Página 5" class="zoomable"></div>
@@ -187,14 +179,12 @@
     </div>
   </div>
 
-  <!-- Botones de Navegación + Pantalla Completa -->
   <div class="controls">
     <button class="btn" id="prev">❮ Anterior</button>
     <button class="btn-fullscreen" id="fullscreen-btn" title="Pantalla completa">⛶ Pantalla Completa</button>
     <button class="btn" id="next">Siguiente ❯</button>
   </div>
 
-  <!-- Scripts -->
   <script src="https://cdn.jsdelivr.net/npm/page-flip/dist/js/page-flip.browser.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/medium-zoom@1.0.6/dist/medium-zoom.min.js"></script>
 
@@ -223,7 +213,7 @@
       document.getElementById('prev').addEventListener('click', () => pageFlip.flipPrev());
       document.getElementById('next').addEventListener('click', () => pageFlip.flipNext());
 
-      // LÓGICA DE PANTALLA COMPLETA
+      // Pantalla Completa
       const fullscreenBtn = document.getElementById('fullscreen-btn');
       fullscreenBtn.addEventListener('click', () => {
         if (!document.fullscreenElement) {
@@ -239,7 +229,6 @@
         }
       });
 
-      // Evento para actualizar texto del botón si el usuario sale con la tecla ESC
       document.addEventListener('fullscreenchange', () => {
         if (!document.fullscreenElement) {
           fullscreenBtn.textContent = '⛶ Pantalla Completa';
@@ -255,11 +244,35 @@
         });
       });
 
-      // Zoom aislado
-      const zoom = mediumZoom('.zoomable', {
+      // Zoom configurado manualmente (sin auto-attach a clic)
+      const zoom = mediumZoom({
         margin: 16,
         background: 'rgba(0, 0, 0, 0.88)',
         scrollOffset: 0
+      });
+
+      // EVENTO DE DOBLE CLIC / DOBLE TAP EN CADA IMAGEN
+      document.querySelectorAll('.zoomable').forEach(img => {
+        let lastTap = 0;
+
+        // Doble clic en PC
+        img.addEventListener('dblclick', (e) => {
+          e.stopPropagation();
+          zoom.attach(img);
+          zoom.open();
+        });
+
+        // Doble tap en celulares
+        img.addEventListener('touchend', (e) => {
+          const currentTime = new Date().getTime();
+          const tapLength = currentTime - lastTap;
+          if (tapLength < 300 && tapLength > 0) {
+            e.stopPropagation();
+            zoom.attach(img);
+            zoom.open();
+          }
+          lastTap = currentTime;
+        });
       });
 
       zoom.on('open', () => {
