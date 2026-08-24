@@ -29,7 +29,7 @@
     .catalog-title {
       color: #2b2b2b;
       font-size: 1.4rem;
-      margin-bottom: 8px;
+      margin-bottom: 6px;
       text-align: center;
       font-weight: 600;
       letter-spacing: 0.5px;
@@ -66,7 +66,7 @@
       height: 100%;
       object-fit: contain;
       display: block;
-      cursor: zoom-in; /* Indica al usuario que puede hacer clic para ampliar */
+      cursor: zoom-in;
     }
 
     .controls {
@@ -94,14 +94,20 @@
       transform: translateY(-2px);
     }
 
-    /* Fondo oscuro transparente cuando la imagen está ampliada */
+    /* Estilos del modal de Zoom */
     .medium-zoom-overlay {
-      background-color: rgba(0, 0, 0, 0.85) !important;
+      background-color: rgba(0, 0, 0, 0.88) !important;
       z-index: 9999;
     }
 
     .medium-zoom-image--opened {
       z-index: 10000;
+      cursor: zoom-out !important;
+    }
+
+    /* Desactiva clics en el flipbook cuando el zoom está abierto */
+    .disabled-flipbook {
+      pointer-events: none;
     }
 
     @media (max-width: 600px) {
@@ -118,7 +124,7 @@
 <body>
 
   <h1 class="catalog-title">Catálogo Materas de Cemento</h1>
-  <p class="zoom-hint">🔍 Haz clic o toca la imagen para ampliar</p>
+  <p class="zoom-hint">🔍 Toca o haz clic en la imagen para ampliar</p>
 
   <div class="flipbook-container">
     <div id="flipbook">
@@ -149,8 +155,9 @@
     document.addEventListener('DOMContentLoaded', function() {
       const screenWidth = window.innerWidth;
       const initialSize = screenWidth < 550 ? Math.min(screenWidth - 40, 480) : 500;
+      const flipbookElem = document.getElementById('flipbook');
 
-      const pageFlip = new St.PageFlip(document.getElementById('flipbook'), {
+      const pageFlip = new St.PageFlip(flipbookElem, {
         width: initialSize,
         height: initialSize,
         size: 'stretch',
@@ -169,11 +176,21 @@
       document.getElementById('prev').addEventListener('click', () => pageFlip.flipPrev());
       document.getElementById('next').addEventListener('click', () => pageFlip.flipNext());
 
-      // Inicializa la función de Zoom en todas las imágenes
-      mediumZoom('.zoomable', {
-        margin: 24,
-        background: '#000000d6',
+      // Configuración del Zoom con aislamiento de eventos
+      const zoom = mediumZoom('.zoomable', {
+        margin: 16,
+        background: 'rgba(0, 0, 0, 0.88)',
         scrollOffset: 0
+      });
+
+      // Al abrir el zoom: Bloquea interacción con el flipbook de fondo
+      zoom.on('open', () => {
+        flipbookElem.classList.add('disabled-flipbook');
+      });
+
+      // Al cerrar el zoom: Reactiva la interacción para cambiar páginas
+      zoom.on('closed', () => {
+        flipbookElem.classList.remove('disabled-flipbook');
       });
     });
   </script>
