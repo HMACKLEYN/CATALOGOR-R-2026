@@ -5,7 +5,6 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Catálogo Materas de Cemento | Rocks & Roots</title>
   
-  <!-- CSS para el Zoom de imágenes -->
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/medium-zoom@1.0.6/dist/style.css">
   
   <style>
@@ -32,7 +31,6 @@
       margin-bottom: 6px;
       text-align: center;
       font-weight: 600;
-      letter-spacing: 0.5px;
     }
 
     .zoom-hint {
@@ -59,6 +57,7 @@
 
     .page {
       background-color: #ffffff;
+      position: relative; /* Permite posicionar botones invisibles sobre la página */
     }
 
     .page img {
@@ -67,6 +66,21 @@
       object-fit: contain;
       display: block;
       cursor: zoom-in;
+    }
+
+    /* ESTILOS PARA LOS BOTONES INVISIBLES DEL ÍNDICE */
+    .index-link {
+      position: absolute;
+      background: rgba(46, 90, 68, 0.15); /* Color suave para identificar la zona (cámbialo a 'transparent' cuando esté ajustado) */
+      border: 1px dashed #2e5a44;
+      border-radius: 6px;
+      cursor: pointer;
+      transition: background 0.2s ease;
+      z-index: 10;
+    }
+
+    .index-link:hover {
+      background: rgba(46, 90, 68, 0.35);
     }
 
     .controls {
@@ -94,7 +108,6 @@
       transform: translateY(-2px);
     }
 
-    /* Estilos del modal de Zoom */
     .medium-zoom-overlay {
       background-color: rgba(0, 0, 0, 0.88) !important;
       z-index: 9999;
@@ -105,7 +118,6 @@
       cursor: zoom-out !important;
     }
 
-    /* Desactiva clics en el flipbook cuando el zoom está abierto */
     .disabled-flipbook {
       pointer-events: none;
     }
@@ -128,8 +140,21 @@
 
   <div class="flipbook-container">
     <div id="flipbook">
+      
+      <!-- Página 1: Portada -->
       <div class="page"><img src="PAGINA-01.png" alt="Portada" class="zoomable"></div>
-      <div class="page"><img src="PAGINA-02.png" alt="Página 2" class="zoomable"></div>
+      
+      <!-- Página 2: ÍNDICE INTERACTIVO -->
+      <div class="page">
+        <img src="PAGINA-02.png" alt="Índice" class="zoomable">
+        
+        <!-- Enlaces a secciones (Ajusta 'top', 'left', 'width' y 'height' según el diseño de tu índice) -->
+        <div class="index-link" style="top: 30%; left: 10%; width: 80%; height: 8%;" data-page="2" title="Ir a Materas Acanaladas"></div>
+        <div class="index-link" style="top: 40%; left: 10%; width: 80%; height: 8%;" data-page="4" title="Ir a Materas Lisas"></div>
+        <div class="index-link" style="top: 50%; left: 10%; width: 80%; height: 8%;" data-page="6" title="Ir a Bases y Platos"></div>
+      </div>
+
+      <!-- Páginas del catálogo -->
       <div class="page"><img src="PAGINA-03.png" alt="Página 3" class="zoomable"></div>
       <div class="page"><img src="PAGINA-04.png" alt="Página 4" class="zoomable"></div>
       <div class="page"><img src="PAGINA-05.png" alt="Página 5" class="zoomable"></div>
@@ -139,6 +164,7 @@
       <div class="page"><img src="PAGINA-09.png" alt="Página 9" class="zoomable"></div>
       <div class="page"><img src="PAGINA-10.png" alt="Página 10" class="zoomable"></div>
       <div class="page"><img src="PAGINA-11.png" alt="Contraportada" class="zoomable"></div>
+      
     </div>
   </div>
 
@@ -147,7 +173,6 @@
     <button class="btn" id="next">Siguiente ❯</button>
   </div>
 
-  <!-- Scripts -->
   <script src="https://cdn.jsdelivr.net/npm/page-flip/dist/js/page-flip.browser.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/medium-zoom@1.0.6/dist/medium-zoom.min.js"></script>
 
@@ -176,19 +201,25 @@
       document.getElementById('prev').addEventListener('click', () => pageFlip.flipPrev());
       document.getElementById('next').addEventListener('click', () => pageFlip.flipNext());
 
-      // Configuración del Zoom con aislamiento de eventos
+      // PROGRAMACIÓN DE CLICS EN EL ÍNDICE
+      document.querySelectorAll('.index-link').forEach(link => {
+        link.addEventListener('click', (e) => {
+          e.stopPropagation(); // Evita que abra el zoom al tocar el botón del índice
+          const targetPage = parseInt(link.getAttribute('data-page'));
+          pageFlip.flip(targetPage); // Lleva al usuario a la página especificada
+        });
+      });
+
       const zoom = mediumZoom('.zoomable', {
         margin: 16,
         background: 'rgba(0, 0, 0, 0.88)',
         scrollOffset: 0
       });
 
-      // Al abrir el zoom: Bloquea interacción con el flipbook de fondo
       zoom.on('open', () => {
         flipbookElem.classList.add('disabled-flipbook');
       });
 
-      // Al cerrar el zoom: Reactiva la interacción para cambiar páginas
       zoom.on('closed', () => {
         flipbookElem.classList.remove('disabled-flipbook');
       });
