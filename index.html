@@ -10,8 +10,10 @@
       margin: 0;
       padding: 0;
     }
+    
     body {
-      background-color: #1a1e24;
+      /* EDITAR COLOR DE FONDO AQUÍ */
+      background-color: #f4f0eb;
       display: flex;
       flex-direction: column;
       justify-content: center;
@@ -22,7 +24,7 @@
     }
     
     .catalog-title {
-      color: #ffffff;
+      color: #ffffff; /* Si usas fondo claro, cambia a #2b2b2b */
       font-size: 1.5rem;
       margin-bottom: 25px;
       text-align: center;
@@ -45,8 +47,8 @@
     .page img {
       width: 100%;
       height: 100%;
-      object-fit: contain; /* Garantiza que la imagen no se corte */
-      background-color: #1a1e24;
+      object-fit: contain; /* Evita que la imagen se corte */
+      background-color: transparent;
     }
 
     .controls {
@@ -80,7 +82,7 @@
   <!-- Título principal -->
   <h1 class="catalog-title">Catálogo Materas de Cemento</h1>
 
-  <!-- Contenedor del Flipbook -->
+  <!-- Contenedor del Flipbook con las 11 páginas -->
   <div class="flipbook-container">
     <div id="flipbook">
       <div class="page"><img src="PAGINA-01.png" alt="Portada"></div>
