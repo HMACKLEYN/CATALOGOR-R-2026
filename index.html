@@ -4,6 +4,10 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Catálogo Materas de Cemento | Rocks & Roots</title>
+  
+  <!-- CSS para el Zoom de imágenes -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/medium-zoom@1.0.6/dist/style.css">
+  
   <style>
     * {
       box-sizing: border-box;
@@ -12,7 +16,7 @@
     }
     
     body {
-      background-color: #f4f0eb; /* Fondo beige cálido */
+      background-color: #f4f0eb;
       display: flex;
       flex-direction: column;
       justify-content: center;
@@ -23,12 +27,19 @@
     }
     
     .catalog-title {
-      color: #2b2b2b; /* Texto oscuro para contraste sobre fondo claro */
+      color: #2b2b2b;
       font-size: 1.4rem;
-      margin-bottom: 20px;
+      margin-bottom: 8px;
       text-align: center;
       font-weight: 600;
       letter-spacing: 0.5px;
+    }
+
+    .zoom-hint {
+      color: #666666;
+      font-size: 0.85rem;
+      margin-bottom: 18px;
+      text-align: center;
     }
 
     .flipbook-container {
@@ -36,7 +47,7 @@
       justify-content: center;
       align-items: center;
       width: 100%;
-      max-width: 550px; /* Ancho máximo en pantallas grandes */
+      max-width: 550px;
       margin-bottom: 20px;
     }
 
@@ -55,6 +66,7 @@
       height: 100%;
       object-fit: contain;
       display: block;
+      cursor: zoom-in; /* Indica al usuario que puede hacer clic para ampliar */
     }
 
     .controls {
@@ -64,9 +76,8 @@
       width: 100%;
     }
 
-    /* Botones con estilo Verde Orgánico */
     .btn {
-      background: #2e5a44; /* Verde elegante / botánico */
+      background: #2e5a44;
       color: #ffffff;
       border: none;
       padding: 12px 26px;
@@ -83,11 +94,19 @@
       transform: translateY(-2px);
     }
 
-    /* Ajustes específicos para pantallas móviles */
+    /* Fondo oscuro transparente cuando la imagen está ampliada */
+    .medium-zoom-overlay {
+      background-color: rgba(0, 0, 0, 0.85) !important;
+      z-index: 9999;
+    }
+
+    .medium-zoom-image--opened {
+      z-index: 10000;
+    }
+
     @media (max-width: 600px) {
       .catalog-title {
         font-size: 1.2rem;
-        margin-bottom: 15px;
       }
       .btn {
         padding: 10px 20px;
@@ -98,37 +117,36 @@
 </head>
 <body>
 
-  <!-- Título principal -->
   <h1 class="catalog-title">Catálogo Materas de Cemento</h1>
+  <p class="zoom-hint">🔍 Haz clic o toca la imagen para ampliar</p>
 
-  <!-- Contenedor del Flipbook -->
   <div class="flipbook-container">
     <div id="flipbook">
-      <div class="page"><img src="PAGINA-01.png" alt="Portada"></div>
-      <div class="page"><img src="PAGINA-02.png" alt="Página 2"></div>
-      <div class="page"><img src="PAGINA-03.png" alt="Página 3"></div>
-      <div class="page"><img src="PAGINA-04.png" alt="Página 4"></div>
-      <div class="page"><img src="PAGINA-05.png" alt="Página 5"></div>
-      <div class="page"><img src="PAGINA-06.png" alt="Página 6"></div>
-      <div class="page"><img src="PAGINA-07.png" alt="Página 7"></div>
-      <div class="page"><img src="PAGINA-08.png" alt="Página 8"></div>
-      <div class="page"><img src="PAGINA-09.png" alt="Página 9"></div>
-      <div class="page"><img src="PAGINA-10.png" alt="Página 10"></div>
-      <div class="page"><img src="PAGINA-11.png" alt="Contraportada"></div>
+      <div class="page"><img src="PAGINA-01.png" alt="Portada" class="zoomable"></div>
+      <div class="page"><img src="PAGINA-02.png" alt="Página 2" class="zoomable"></div>
+      <div class="page"><img src="PAGINA-03.png" alt="Página 3" class="zoomable"></div>
+      <div class="page"><img src="PAGINA-04.png" alt="Página 4" class="zoomable"></div>
+      <div class="page"><img src="PAGINA-05.png" alt="Página 5" class="zoomable"></div>
+      <div class="page"><img src="PAGINA-06.png" alt="Página 6" class="zoomable"></div>
+      <div class="page"><img src="PAGINA-07.png" alt="Página 7" class="zoomable"></div>
+      <div class="page"><img src="PAGINA-08.png" alt="Página 8" class="zoomable"></div>
+      <div class="page"><img src="PAGINA-09.png" alt="Página 9" class="zoomable"></div>
+      <div class="page"><img src="PAGINA-10.png" alt="Página 10" class="zoomable"></div>
+      <div class="page"><img src="PAGINA-11.png" alt="Contraportada" class="zoomable"></div>
     </div>
   </div>
 
-  <!-- Botones de navegación -->
   <div class="controls">
     <button class="btn" id="prev">❮ Anterior</button>
     <button class="btn" id="next">Siguiente ❯</button>
   </div>
 
-  <!-- Script de configuración -->
+  <!-- Scripts -->
   <script src="https://cdn.jsdelivr.net/npm/page-flip/dist/js/page-flip.browser.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/medium-zoom@1.0.6/dist/medium-zoom.min.js"></script>
+
   <script>
     document.addEventListener('DOMContentLoaded', function() {
-      // Cálculo responsivo del tamaño según la pantalla
       const screenWidth = window.innerWidth;
       const initialSize = screenWidth < 550 ? Math.min(screenWidth - 40, 480) : 500;
 
@@ -141,15 +159,22 @@
         minHeight: 280,
         maxHeight: 600,
         drawShadow: true,
-        showCover: false,      /* Desactivado para mantener vista de 1 sola página siempre */
-        usePortrait: true,     /* Fuerza el modo de 1 sola hoja */
-        singlePageMode: true   /* Garantiza vista individual en móviles y desktop */
+        showCover: false,
+        usePortrait: true,
+        singlePageMode: true
       });
 
       pageFlip.loadFromHTML(document.querySelectorAll('#flipbook .page'));
 
       document.getElementById('prev').addEventListener('click', () => pageFlip.flipPrev());
       document.getElementById('next').addEventListener('click', () => pageFlip.flipNext());
+
+      // Inicializa la función de Zoom en todas las imágenes
+      mediumZoom('.zoomable', {
+        margin: 24,
+        background: '#000000d6',
+        scrollOffset: 0
+      });
     });
   </script>
 </body>
