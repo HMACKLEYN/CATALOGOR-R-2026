@@ -31,7 +31,6 @@
       margin-bottom: 6px;
       text-align: center;
       font-weight: 600;
-      letter-spacing: 0.5px;
     }
 
     .zoom-hint {
@@ -54,6 +53,7 @@
       box-shadow: 0 12px 30px rgba(0,0,0,0.15);
       border-radius: 8px;
       overflow: hidden;
+      touch-action: pan-y;
     }
 
     .page {
@@ -131,7 +131,9 @@
     }
 
     .disabled-flipbook {
-      pointer-events: none;
+      pointer-events: none !important;
+      user-select: none !important;
+      touch-action: none !important;
     }
 
     @media (max-width: 600px) {
@@ -192,6 +194,7 @@
     document.addEventListener('DOMContentLoaded', function() {
       const screenWidth = window.innerWidth;
       const initialSize = screenWidth < 550 ? Math.min(screenWidth - 40, 480) : 500;
+      const flipbookContainer = document.querySelector('.flipbook-container');
       const flipbookElem = document.getElementById('flipbook');
 
       const pageFlip = new St.PageFlip(flipbookElem, {
@@ -244,43 +247,57 @@
         });
       });
 
-      // Zoom configurado manualmente (sin auto-attach a clic)
+      // Instancia de Zoom sin elementos adjuntos de inicio
       const zoom = mediumZoom({
         margin: 16,
         background: 'rgba(0, 0, 0, 0.88)',
         scrollOffset: 0
       });
 
-      // EVENTO DE DOBLE CLIC / DOBLE TAP EN CADA IMAGEN
-      document.querySelectorAll('.zoomable').forEach(img => {
-        let lastTap = 0;
+      let currentZoomedImg = null;
 
-        // Doble clic en PC
-        img.addEventListener('dblclick', (e) => {
+      function triggerZoom(imgElement) {
+        if (currentZoomedImg) {
+          zoom.detach(currentZoomedImg);
+        }
+        currentZoomedImg = imgElement;
+        zoom.attach(imgElement);
+        zoom.open();
+      }
+
+      // Event Listener Global mediante delegación para capturar imágenes en cualquier hoja (incluso clonadas)
+      let lastTap = 0;
+
+      flipbookElem.addEventListener('dblclick', (e) => {
+        if (e.target.tagName === 'IMG' && e.target.classList.contains('zoomable')) {
           e.stopPropagation();
-          zoom.attach(img);
-          zoom.open();
-        });
+          triggerZoom(e.target);
+        }
+      });
 
-        // Doble tap en celulares
-        img.addEventListener('touchend', (e) => {
+      flipbookElem.addEventListener('touchend', (e) => {
+        if (e.target.tagName === 'IMG' && e.target.classList.contains('zoomable')) {
           const currentTime = new Date().getTime();
           const tapLength = currentTime - lastTap;
           if (tapLength < 300 && tapLength > 0) {
             e.stopPropagation();
-            zoom.attach(img);
-            zoom.open();
+            triggerZoom(e.target);
           }
           lastTap = currentTime;
-        });
+        }
       });
 
+      // Eventos de estado de zoom
       zoom.on('open', () => {
-        flipbookElem.classList.add('disabled-flipbook');
+        flipbookContainer.classList.add('disabled-flipbook');
       });
 
       zoom.on('closed', () => {
-        flipbookElem.classList.remove('disabled-flipbook');
+        flipbookContainer.classList.remove('disabled-flipbook');
+        if (currentZoomedImg) {
+          zoom.detach(currentZoomedImg);
+          currentZoomedImg = null;
+        }
       });
     });
   </script>
