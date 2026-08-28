@@ -13,7 +13,10 @@
     }
     
     body {
-      background-color: #f4f0eb;
+      /* Fondo beige suave en degradado animado */
+      background: linear-gradient(-45deg, #f7f3ed, #eae3d9, #f4efe6, #ebe4d8);
+      background-size: 400% 400%;
+      animation: gradientBG 16s ease infinite;
       display: flex;
       flex-direction: column;
       justify-content: center;
@@ -21,6 +24,37 @@
       min-height: 100vh;
       font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
       padding: 20px 10px;
+      position: relative;
+      overflow-x: hidden;
+    }
+
+    /* Animación del degradado de fondo */
+    @keyframes gradientBG {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
+
+    /* Sombra botánica proyectada en el fondo */
+    body::before {
+      content: "";
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 800" opacity="0.08"><path fill="%232b382b" d="M720,100 C620,150 550,280 500,400 C460,300 400,180 280,120 C350,240 380,380 390,500 C270,440 120,420 20,480 C150,520 300,550 380,590 C340,680 260,750 150,800 C300,780 410,680 430,600 C500,690 600,750 720,780 C630,680 520,580 480,520 C580,520 700,480 780,400 C680,410 560,450 460,480 C490,360 580,210 720,100 Z"/></svg>');
+      background-repeat: no-repeat;
+      background-position: top right;
+      background-size: 80% auto;
+      pointer-events: none;
+      z-index: 0;
+      filter: blur(12px);
+    }
+
+    .catalog-title, .zoom-hint, .flipbook-container, .controls {
+      position: relative;
+      z-index: 1;
     }
     
     .catalog-title {
@@ -29,10 +63,11 @@
       margin-bottom: 6px;
       text-align: center;
       font-weight: 600;
+      letter-spacing: 0.5px;
     }
 
     .zoom-hint {
-      color: #666666;
+      color: #665f55;
       font-size: 0.85rem;
       margin-bottom: 18px;
       text-align: center;
@@ -48,7 +83,7 @@
     }
 
     #flipbook {
-      box-shadow: 0 12px 30px rgba(0,0,0,0.15);
+      box-shadow: 0 16px 38px rgba(0,0,0,0.12);
       border-radius: 8px;
       overflow: hidden;
       touch-action: pan-y;
@@ -91,7 +126,7 @@
       font-weight: 600;
       font-size: 0.95rem;
       cursor: pointer;
-      box-shadow: 0 4px 12px rgba(46, 90, 68, 0.25);
+      box-shadow: 0 4px 12px rgba(46, 90, 68, 0.2);
       transition: all 0.2s ease;
     }
 
@@ -114,29 +149,37 @@
 <body>
 
   <h1 class="catalog-title">Catálogo Materas de Cemento</h1>
-  <p class="zoom-hint">🔍 Haz doble clic / doble toque para abrir la imagen en alta calidad</p>
+  <p class="zoom-hint">🔍 Haz doble clic / doble toque para ver la imagen completa</p>
 
   <div class="flipbook-container">
     <div id="flipbook">
       
-      <div class="page"><img src="PAGINA-01.png" alt="Portada" class="zoomable"></div>
+      <!-- Lista actualizada de imágenes según el repositorio -->
+      <div class="page"><img src="PAGINA.png" alt="Portada" class="zoomable"></div>
       
       <div class="page">
-        <img src="PAGINA-02.png" alt="Índice" class="zoomable">
-        <div class="index-link" style="top: 30%; left: 10%; width: 80%; height: 8%;" data-page="2" title="Ir a Materas Acanaladas"></div>
-        <div class="index-link" style="top: 40%; left: 10%; width: 80%; height: 8%;" data-page="4" title="Ir a Materas Lisas"></div>
-        <div class="index-link" style="top: 50%; left: 10%; width: 80%; height: 8%;" data-page="6" title="Ir a Bases y Platos"></div>
+        <img src="PAGINA2.png" alt="Página 2" class="zoomable">
+        <!-- Zonas interactivas del índice si aplicas en la pág 2 -->
+        <div class="index-link" style="top: 30%; left: 10%; width: 80%; height: 8%;" data-page="2" title="Ir a Sección 1"></div>
+        <div class="index-link" style="top: 40%; left: 10%; width: 80%; height: 8%;" data-page="4" title="Ir a Sección 2"></div>
       </div>
 
-      <div class="page"><img src="PAGINA-03.png" alt="Página 3" class="zoomable"></div>
-      <div class="page"><img src="PAGINA-04.png" alt="Página 4" class="zoomable"></div>
-      <div class="page"><img src="PAGINA-05.png" alt="Página 5" class="zoomable"></div>
-      <div class="page"><img src="PAGINA-06.png" alt="Página 6" class="zoomable"></div>
-      <div class="page"><img src="PAGINA-07.png" alt="Página 7" class="zoomable"></div>
-      <div class="page"><img src="PAGINA-08.png" alt="Página 8" class="zoomable"></div>
-      <div class="page"><img src="PAGINA-09.png" alt="Página 9" class="zoomable"></div>
-      <div class="page"><img src="PAGINA-10.png" alt="Página 10" class="zoomable"></div>
-      <div class="page"><img src="PAGINA-11.png" alt="Contraportada" class="zoomable"></div>
+      <div class="page"><img src="PAGINA3.png" alt="Página 3" class="zoomable"></div>
+      <div class="page"><img src="PAGINA4.png" alt="Página 4" class="zoomable"></div>
+      <div class="page"><img src="PAGINA5.png" alt="Página 5" class="zoomable"></div>
+      <div class="page"><img src="PAGINA6.png" alt="Página 6" class="zoomable"></div>
+      <div class="page"><img src="PAGINA7.png" alt="Página 7" class="zoomable"></div>
+      <div class="page"><img src="PAGINA8.png" alt="Página 8" class="zoomable"></div>
+      <div class="page"><img src="PAGINA9.png" alt="Página 9" class="zoomable"></div>
+      <div class="page"><img src="PAGINA10.png" alt="Página 10" class="zoomable"></div>
+      <div class="page"><img src="PAGINA11.png" alt="Página 11" class="zoomable"></div>
+      <div class="page"><img src="PAGINA12.png" alt="Página 12" class="zoomable"></div>
+      <div class="page"><img src="PAGINA13.png" alt="Página 13" class="zoomable"></div>
+      <div class="page"><img src="PAGINA14.png" alt="Página 14" class="zoomable"></div>
+      <div class="page"><img src="PAGINA15.png" alt="Página 15" class="zoomable"></div>
+      <div class="page"><img src="PAGINA16.png" alt="Página 16" class="zoomable"></div>
+      <div class="page"><img src="PAGINA17.png" alt="Página 17" class="zoomable"></div>
+      <div class="page"><img src="PAGINA18.png" alt="Página 18" class="zoomable"></div>
       
     </div>
   </div>
@@ -182,14 +225,13 @@
         });
       });
 
-      // LÓGICA DE ABRIR EN NUEVA PESTAÑA CON DOBLE CLIC / DOBLE TAP
+      // Apertura de imagen en nueva pestaña con Doble Clic / Tap
       let lastTap = 0;
 
       function openImageInNewTab(imgSrc) {
         window.open(imgSrc, '_blank');
       }
 
-      // Doble Clic (PC)
       flipbookElem.addEventListener('dblclick', (e) => {
         if (e.target.tagName === 'IMG' && e.target.classList.contains('zoomable')) {
           e.stopPropagation();
@@ -197,7 +239,6 @@
         }
       });
 
-      // Doble Tap (Móvil)
       flipbookElem.addEventListener('touchend', (e) => {
         if (e.target.tagName === 'IMG' && e.target.classList.contains('zoomable')) {
           const currentTime = new Date().getTime();
