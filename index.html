@@ -6,6 +6,17 @@
   <title>Catálogo Materas de Cemento | Rocks & Roots</title>
   
   <style>
+    /* =========================================================
+       CONFIGURACIÓN DE COLORES POR TEMPORADA (Editar aquí)
+       ========================================================= */
+    :root {
+      /* Paleta: Amor y Amistad (Rojos y Rosas suaves) */
+      --color-1: #fce4ec; /* Rosa muy claro pastel */
+      --color-2: #f48fb1; /* Rosa medio cálido */
+      --color-3: #e57373; /* Rojo suave / Coral */
+      --color-4: #f8bbd0; /* Rosa palo romántico */
+    }
+
     * {
       box-sizing: border-box;
       margin: 0;
@@ -13,10 +24,10 @@
     }
     
     body {
-      /* Fondo beige suave en degradado animado */
-      background: linear-gradient(-45deg, #f7f3ed, #eae3d9, #f4efe6, #ebe4d8);
+      /* Degradado animado usando las variables de temporada */
+      background: linear-gradient(-45deg, var(--color-1), var(--color-2), var(--color-3), var(--color-4));
       background-size: 400% 400%;
-      animation: gradientBG 16s ease infinite;
+      animation: gradientBG 18s ease infinite;
       display: flex;
       flex-direction: column;
       justify-content: center;
@@ -28,14 +39,14 @@
       overflow-x: hidden;
     }
 
-    /* Animación del degradado de fondo */
+    /* Animación del degradado sutil */
     @keyframes gradientBG {
       0% { background-position: 0% 50%; }
       50% { background-position: 100% 50%; }
       100% { background-position: 0% 50%; }
     }
 
-    /* Sombra botánica proyectada en el fondo */
+    /* Sombra botánica proyectada sobre el fondo */
     body::before {
       content: "";
       position: fixed;
@@ -52,22 +63,28 @@
       filter: blur(12px);
     }
 
-    .catalog-title, .zoom-hint, .flipbook-container, .controls {
+    .catalog-title-container, .zoom-hint, .flipbook-container, .controls {
       position: relative;
       z-index: 1;
     }
     
-    .catalog-title {
-      color: #2b2b2b;
-      font-size: 1.4rem;
-      margin-bottom: 6px;
-      text-align: center;
-      font-weight: 600;
-      letter-spacing: 0.5px;
+    .catalog-title-container {
+      width: 100%;
+      max-width: 380px;
+      margin-bottom: 8px;
+      display: flex;
+      justify-content: center;
+    }
+
+    .catalog-title-img {
+      width: 100%;
+      height: auto;
+      object-fit: contain;
+      display: block;
     }
 
     .zoom-hint {
-      color: #665f55;
+      color: #5c4b4e;
       font-size: 0.85rem;
       margin-bottom: 18px;
       text-align: center;
@@ -136,8 +153,8 @@
     }
 
     @media (max-width: 600px) {
-      .catalog-title {
-        font-size: 1.2rem;
+      .catalog-title-container {
+        max-width: 280px;
       }
       .btn {
         padding: 10px 22px;
@@ -148,7 +165,10 @@
 </head>
 <body>
 
-  <h1 class="catalog-title">Catálogo Materas de Cemento</h1>
+  <div class="catalog-title-container">
+    <img src="TITULOCATALOGO.png" alt="Catálogo Materas de Cemento - Rocks & Roots" class="catalog-title-img">
+  </div>
+
   <p class="zoom-hint">🔍 Haz doble clic / doble toque para ver la imagen completa</p>
 
   <div class="flipbook-container">
@@ -227,7 +247,6 @@
       document.getElementById('prev').addEventListener('click', () => pageFlip.flipPrev());
       document.getElementById('next').addEventListener('click', () => pageFlip.flipNext());
 
-      // Clics del índice
       document.querySelectorAll('.index-link').forEach(link => {
         link.addEventListener('click', (e) => {
           e.stopPropagation();
@@ -236,7 +255,6 @@
         });
       });
 
-      // Apertura de imagen en nueva pestaña con Doble Clic / Tap
       let lastTap = 0;
 
       function openImageInNewTab(imgSrc) {
