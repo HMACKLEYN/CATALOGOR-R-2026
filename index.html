@@ -11,7 +11,7 @@
   <!-- ETIQUETAS OPEN GRAPH -->
   <meta property="og:type" content="website">
   <meta property="og:title" content="Catálogo Materas de Cemento | Rocks & Roots">
-  <meta property="og:description" content="Explora nuestro catálogo de plantas y materas de cemento.">
+  <meta property="og:description" content="Explora nuestro catálogo interactivo de materas de cemento y diseño botánico.">
   <meta property="og:image" content="https://hmackleyn.github.io/CATALOGOR-R-2026/BANNER.png">
   <meta property="og:image:width" content="1200">
   <meta property="og:image:height" content="630">
@@ -55,6 +55,9 @@
       100% { background-position: 0% 50%; }
     }
 
+    /* =========================================================
+       IMAGEN PNG DE HOJAS CON BLUR PROYECTADA AL FONDO
+       ========================================================= */
     body::before {
       content: "";
       position: fixed;
@@ -62,13 +65,17 @@
       left: 0;
       width: 100vw;
       height: 100vh;
-      background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 800" opacity="0.08"><path fill="%232b382b" d="M720,100 C620,150 550,280 500,400 C460,300 400,180 280,120 C350,240 380,380 390,500 C270,440 120,420 20,480 C150,520 300,550 380,590 C340,680 260,750 150,800 C300,780 410,680 430,600 C500,690 600,750 720,780 C630,680 520,580 480,520 C580,520 700,480 780,400 C680,410 560,450 460,480 C490,360 580,210 720,100 Z"/></svg>');
+      /* Tu imagen PNG de hojas (Cámbialo por tu nombre de archivo exacto) */
+      background-image: url('HOJAS.png');
       background-repeat: no-repeat;
       background-position: top right;
-      background-size: 80% auto;
+      background-size: contain; /* O 'cover' si quieres que ocupe toda la pantalla */
       pointer-events: none;
       z-index: 0;
-      filter: blur(12px);
+      
+      /* Ajustes visuales de intensidad y desenfoque */
+      opacity: 0.15;            /* Transparencia para que se integre suavemente */
+      filter: blur(8px);        /* Nivel de desenfoque en píxeles */
     }
 
     .catalog-title-container, .zoom-hint, .flipbook-container, .controls {
@@ -76,7 +83,6 @@
       z-index: 1;
     }
     
-    /* MODIFICADO: Aumentado de 380px a 520px para coincidir casi exacto con el ancho del catálogo (550px) */
     .catalog-title-container {
       width: 100%;
       max-width: 520px; 
@@ -162,7 +168,6 @@
     }
 
     @media (max-width: 600px) {
-      /* MODIFICADO: Ajuste responsivo para pantallas de celular */
       .catalog-title-container {
         max-width: 90vw;
       }
@@ -176,7 +181,7 @@
 <body>
 
   <div class="catalog-title-container">
-    <img src="TITULOCATALOGO.png" alt="Catálogo Materas de Cemento 2026 - Rocks & Roots" class="catalog-title-img">
+    <img src="TITULO-CATALOGO.png" alt="Catálogo Materas de Cemento 2026 - Rocks & Roots" class="catalog-title-img">
   </div>
 
   <p class="zoom-hint">🔍 Haz doble clic / doble toque para ver la imagen completa</p>
@@ -221,8 +226,6 @@
       <div class="page"><img src="PAGINA29.jpg" alt="Página 29" class="zoomable"></div>
       <div class="page"><img src="PAGINA30.jpg" alt="Página 30" class="zoomable"></div>
       <div class="page"><img src="PAGINA31.jpg" alt="Página 31" class="zoomable"></div>
-      <div class="page"><img src="PAGINA32.jpg" alt="Página 32" class="zoomable"></div>
-      <div class="page"><img src="PAGINA33.jpg" alt="Página 33" class="zoomable"></div>
       
     </div>
   </div>
