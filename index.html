@@ -4,17 +4,28 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Catálogo Materas de Cemento | Rocks & Roots</title>
+
+  <!-- FAVICON -->
+  <link rel="icon" type="image/png" href="favicon.png">
+
+  <!-- ETIQUETAS OPEN GRAPH -->
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Catálogo Materas de Cemento | Rocks & Roots">
+  <meta property="og:description" content="Explora nuestro catálogo interactivo de materas de cemento y diseño botánico.">
+  <meta property="og:image" content="https://hmackleyn.github.io/CATALOGOR-R-2026/BANNER.png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
   
   <style>
     /* =========================================================
-       CONFIGURACIÓN DE COLORES POR TEMPORADA (Editar aquí)
+       CONFIGURACIÓN DE COLORES POR TEMPORADA
        ========================================================= */
     :root {
       /* Paleta: Amor y Amistad (Rojos y Rosas suaves) */
-      --color-1: #fce4ec; /* Rosa muy claro pastel */
-      --color-2: #f48fb1; /* Rosa medio cálido */
-      --color-3: #e57373; /* Rojo suave / Coral */
-      --color-4: #f8bbd0; /* Rosa palo romántico */
+      --color-1: #fce4ec;
+      --color-2: #f48fb1;
+      --color-3: #e57373;
+      --color-4: #f8bbd0;
     }
 
     * {
@@ -24,7 +35,6 @@
     }
     
     body {
-      /* Degradado animado usando las variables de temporada */
       background: linear-gradient(-45deg, var(--color-1), var(--color-2), var(--color-3), var(--color-4));
       background-size: 400% 400%;
       animation: gradientBG 18s ease infinite;
@@ -39,14 +49,12 @@
       overflow-x: hidden;
     }
 
-    /* Animación del degradado sutil */
     @keyframes gradientBG {
       0% { background-position: 0% 50%; }
       50% { background-position: 100% 50%; }
       100% { background-position: 0% 50%; }
     }
 
-    /* Sombra botánica proyectada sobre el fondo */
     body::before {
       content: "";
       position: fixed;
@@ -68,9 +76,10 @@
       z-index: 1;
     }
     
+    /* MODIFICADO: Aumentado de 380px a 520px para coincidir casi exacto con el ancho del catálogo (550px) */
     .catalog-title-container {
       width: 100%;
-      max-width: 380px;
+      max-width: 520px; 
       margin-bottom: 8px;
       display: flex;
       justify-content: center;
@@ -153,8 +162,9 @@
     }
 
     @media (max-width: 600px) {
+      /* MODIFICADO: Ajuste responsivo para pantallas de celular */
       .catalog-title-container {
-        max-width: 280px;
+        max-width: 90vw;
       }
       .btn {
         padding: 10px 22px;
@@ -166,7 +176,7 @@
 <body>
 
   <div class="catalog-title-container">
-    <img src="TITULOCATALOGO.png" alt="Catálogo Materas de Cemento - Rocks & Roots" class="catalog-title-img">
+    <img src="TITULOCATALOGO.png" alt="Catálogo Materas de Cemento 2026 - Rocks & Roots" class="catalog-title-img">
   </div>
 
   <p class="zoom-hint">🔍 Haz doble clic / doble toque para ver la imagen completa</p>
