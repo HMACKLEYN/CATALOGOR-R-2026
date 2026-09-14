@@ -8,10 +8,13 @@
   <!-- FAVICON -->
   <link rel="icon" type="image/png" href="favicon.png">
 
+  <!-- LIBRERÍA DE ICONOS (FontAwesome) -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
   <!-- ETIQUETAS OPEN GRAPH -->
   <meta property="og:type" content="website">
   <meta property="og:title" content="Catálogo Materas de Cemento | Rocks & Roots">
-  <meta property="og:description" content="Explora nuestro catálogo de plantas y materas de cemento.">
+  <meta property="og:description" content="Explora nuestro catálogo interactivo de materas de cemento y diseño botánico.">
   <meta property="og:image" content="https://hmackleyn.github.io/CATALOGOR-R-2026/BANNER.png">
   <meta property="og:image:width" content="1200">
   <meta property="og:image:height" content="630">
@@ -22,10 +25,10 @@
        ========================================================= */
     :root {
       /* Paleta: Amor y Amistad (Rojos y Rosas suaves) */
-      --color-1: #fce4ec;
-      --color-2: #f48fb1;
-      --color-3: #e57373;
-      --color-4: #f8bbd0;
+      --color-1: #FFD6D1;
+      --color-2: #FAE2E2;
+      --color-3: #FFBFB0;
+      --color-4: #FCDDD3;
     }
 
     * {
@@ -44,7 +47,7 @@
       align-items: center;
       min-height: 100vh;
       font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-      padding: 20px 10px;
+      padding: 20px 10px 40px 10px;
       position: relative;
       overflow-x: hidden;
     }
@@ -55,9 +58,7 @@
       100% { background-position: 0% 50%; }
     }
 
-    /* =========================================================
-       IMAGEN PNG DE HOJAS CON BLUR PROYECTADA AL FONDO
-       ========================================================= */
+    /* IMAGEN DE FONDO (HOJAS CON BLUR) */
     body::before {
       content: "";
       position: fixed;
@@ -65,20 +66,17 @@
       left: 0;
       width: 100vw;
       height: 100vh;
-      /* Tu imagen PNG de hojas (Cámbialo por tu nombre de archivo exacto) */
       background-image: url('HOJAS.png');
       background-repeat: no-repeat;
       background-position: top right;
-      background-size: contain; /* O 'cover' si quieres que ocupe toda la pantalla */
+      background-size: contain;
       pointer-events: none;
       z-index: 0;
-      
-      /* Ajustes visuales de intensidad y desenfoque */
-      opacity: 0.15;            /* Transparencia para que se integre suavemente */
-      filter: blur(8px);        /* Nivel de desenfoque en píxeles */
+      opacity: 0.15;
+      filter: blur(8px);
     }
 
-    .catalog-title-container, .zoom-hint, .flipbook-container, .controls {
+    .catalog-title-container, .zoom-hint, .flipbook-container, .controls, .bottom-image-container, .social-links {
       position: relative;
       z-index: 1;
     }
@@ -147,6 +145,7 @@
       align-items: center;
       gap: 12px;
       width: 100%;
+      margin-bottom: 18px;
     }
 
     .btn {
@@ -167,25 +166,114 @@
       transform: translateY(-2px);
     }
 
+    .bottom-image-container {
+      width: 100%;
+      max-width: 350px;
+      display: flex;
+      justify-content: center;
+      margin-top: 5px;
+      margin-bottom: 15px;
+    }
+
+    .bottom-img {
+      width: 100%;
+      height: auto;
+      object-fit: contain;
+      display: block;
+    }
+
+    /* =========================================================
+       ESTILOS PARA ICONOS REDES SOCIALES
+       ========================================================= */
+    .social-links {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 18px;
+      margin-top: 5px;
+    }
+
+    .social-icon {
+      width: 44px;
+      height: 44px;
+      border-radius: 50%;
+      background-color: #ffffff;
+      color: #2e5a44;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-size: 1.3rem;
+      text-decoration: none;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+      transition: all 0.2s ease;
+    }
+
+    .social-icon:hover {
+      background-color: #2e5a44;
+      color: #ffffff;
+      transform: translateY(-3px);
+      box-shadow: 0 6px 14px rgba(0,0,0,0.15);
+    }
+
+    /* =========================================================
+       ESTILOS BOTÓN FLOTANTE WHATSAPP
+       ========================================================= */
+    .whatsapp-btn {
+      position: fixed;
+      bottom: 24px;
+      right: 24px;
+      width: 58px;
+      height: 58px;
+      background-color: #25d366;
+      color: #ffffff;
+      border-radius: 50%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-size: 1.9rem;
+      box-shadow: 0 6px 18px rgba(37, 211, 102, 0.45);
+      z-index: 99;
+      text-decoration: none;
+      transition: all 0.3s ease;
+    }
+
+    .whatsapp-btn:hover {
+      transform: scale(1.1);
+      box-shadow: 0 8px 22px rgba(37, 211, 102, 0.6);
+      color: #ffffff;
+    }
+
     @media (max-width: 600px) {
       .catalog-title-container {
         max-width: 90vw;
       }
+      .bottom-image-container {
+        max-width: 260px;
+      }
       .btn {
         padding: 10px 22px;
         font-size: 0.9rem;
+      }
+      .whatsapp-btn {
+        width: 52px;
+        height: 52px;
+        font-size: 1.7rem;
+        bottom: 18px;
+        right: 18px;
       }
     }
   </style>
 </head>
 <body>
 
+  <!-- Título principal -->
   <div class="catalog-title-container">
     <img src="TITULOCATALOGO.png" alt="Catálogo Materas de Cemento 2026 - Rocks & Roots" class="catalog-title-img">
   </div>
 
   <p class="zoom-hint">🔍 Haz doble clic / doble toque para ver la imagen completa</p>
 
+  <!-- Catálogo / Flipbook -->
   <div class="flipbook-container">
     <div id="flipbook">
       
@@ -226,16 +314,38 @@
       <div class="page"><img src="PAGINA29.jpg" alt="Página 29" class="zoomable"></div>
       <div class="page"><img src="PAGINA30.jpg" alt="Página 30" class="zoomable"></div>
       <div class="page"><img src="PAGINA31.jpg" alt="Página 31" class="zoomable"></div>
-      <div class="page"><img src="PAGINA32.jpg" alt="Página 32" class="zoomable"></div>
-      <div class="page"><img src="PAGINA33.jpg" alt="Página 33" class="zoomable"></div>
       
     </div>
   </div>
 
+  <!-- Botones de navegación -->
   <div class="controls">
     <button class="btn" id="prev">❮ Anterior</button>
     <button class="btn" id="next">Siguiente ❯</button>
   </div>
+
+  <!-- Imagen inferior -->
+  <div class="bottom-image-container">
+    <img src="LOGOFINAL.png" alt="Información adicional Rocks & Roots" class="bottom-img">
+  </div>
+
+  <!-- Iconos Redes Sociales -->
+  <div class="social-links">
+    <a href="https://instagram.com/TU_USUARIO" target="_blank" class="social-icon" title="Instagram">
+      <i class="fa-brands fa-instagram"></i>
+    </a>
+    <a href="https://facebook.com/TU_USUARIO" target="_blank" class="social-icon" title="Facebook">
+      <i class="fa-brands fa-facebook-f"></i>
+    </a>
+    <a href="https://tiktok.com/@TU_USUARIO" target="_blank" class="social-icon" title="TikTok">
+      <i class="fa-brands fa-tiktok"></i>
+    </a>
+  </div>
+
+  <!-- Botón Flotante de WhatsApp -->
+  <a href="https://wa.me/573000000000?text=Hola!%20👋%20Vengo%20del%20catálogo%20interactivo%20y%20me%20gustaría%20más%20información." target="_blank" class="whatsapp-btn" title="Contactar por WhatsApp">
+    <i class="fa-brands fa-whatsapp"></i>
+  </a>
 
   <script src="https://cdn.jsdelivr.net/npm/page-flip/dist/js/page-flip.browser.js"></script>
 
