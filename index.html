@@ -166,9 +166,10 @@
       transform: translateY(-2px);
     }
 
+    /* TAMAÑO DE LA IMAGEN INFERIOR */
     .bottom-image-container {
       width: 100%;
-      max-width: 350px;
+      max-width: 220px;
       display: flex;
       justify-content: center;
       margin-top: 5px;
@@ -182,9 +183,7 @@
       display: block;
     }
 
-    /* =========================================================
-       ESTILOS PARA ICONOS REDES SOCIALES
-       ========================================================= */
+    /* ESTILOS ICONOS REDES SOCIALES */
     .social-links {
       display: flex;
       justify-content: center;
@@ -216,7 +215,7 @@
     }
 
     /* =========================================================
-       ESTILOS BOTÓN FLOTANTE WHATSAPP
+       BOTÓN FLOTANTE WHATSAPP CON ANIMACIÓN CADA 5 SEGUNDOS
        ========================================================= */
     .whatsapp-btn {
       position: fixed;
@@ -234,13 +233,31 @@
       box-shadow: 0 6px 18px rgba(37, 211, 102, 0.45);
       z-index: 99;
       text-decoration: none;
-      transition: all 0.3s ease;
+      transition: background-color 0.3s ease;
+      animation: whatsappBounce 5s infinite ease-in-out;
     }
 
     .whatsapp-btn:hover {
+      animation-play-state: paused; /* Pausa el rebote al pasar el mouse sobre él */
       transform: scale(1.1);
       box-shadow: 0 8px 22px rgba(37, 211, 102, 0.6);
       color: #ffffff;
+    }
+
+    /* Keyframes para el rebote dinámico cada 5 segundos */
+    @keyframes whatsappBounce {
+      0%, 20%, 100% {
+        transform: translateY(0) scale(1);
+      }
+      5% {
+        transform: translateY(-14px) scale(1.05);
+      }
+      10% {
+        transform: translateY(0) scale(0.98);
+      }
+      15% {
+        transform: translateY(-7px) scale(1.02);
+      }
     }
 
     @media (max-width: 600px) {
@@ -248,7 +265,7 @@
         max-width: 90vw;
       }
       .bottom-image-container {
-        max-width: 260px;
+        max-width: 180px;
       }
       .btn {
         padding: 10px 22px;
@@ -331,13 +348,13 @@
 
   <!-- Iconos Redes Sociales -->
   <div class="social-links">
-    <a href="https://instagram.com/TU_USUARIO" target="_blank" class="social-icon" title="Instagram">
+    <a href="https://www.instagram.com/rocks.roots.design/" target="_blank" class="social-icon" title="Instagram">
       <i class="fa-brands fa-instagram"></i>
     </a>
-    <a href="https://facebook.com/TU_USUARIO" target="_blank" class="social-icon" title="Facebook">
+    <a href="https://www.facebook.com/share/1JdRBmCtpD/?mibextid=wwXIfr" target="_blank" class="social-icon" title="Facebook">
       <i class="fa-brands fa-facebook-f"></i>
     </a>
-    <a href="https://tiktok.com/@TU_USUARIO" target="_blank" class="social-icon" title="TikTok">
+    <a href="https://www.tiktok.com/@rocks.roots?_r=1&_t=ZS-99j8mEOg2R6" target="_blank" class="social-icon" title="TikTok">
       <i class="fa-brands fa-tiktok"></i>
     </a>
   </div>
