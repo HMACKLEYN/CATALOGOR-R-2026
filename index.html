@@ -11,6 +11,11 @@
   <!-- LIBRERÍA DE ICONOS (FontAwesome) -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 
+  <!-- TIPOGRAFÍA EDITORIAL PARA BADGES Y HEADER -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+
   <!-- ETIQUETAS OPEN GRAPH -->
   <meta property="og:type" content="website">
   <meta property="og:title" content="Catálogo Materas de Cemento | Rocks & Roots">
@@ -21,14 +26,17 @@
   
   <style>
     /* =========================================================
-       CONFIGURACIÓN DE COLORES POR TEMPORADA
+       PALETA TEMPORADA: AMOR Y AMISTAD (SOFT BLUSH & CONCRETE)
        ========================================================= */
     :root {
-      /* Paleta: Amor y Amistad (Rojos y Rosas suaves) */
-      --color-1: #FFD6D1;
-      --color-2: #FAE2E2;
-      --color-3: #FFBFB0;
-      --color-4: #FCDDD3;
+      --color-1: #F9F0EE; /* Nude / Rosa Lino ultra suave */
+      --color-2: #F3E5E3; /* Rosa cuarzo desaturado */
+      --color-3: #EFE0DD; /* Tono lino cálido */
+      --color-4: #F7EBE8; /* Blanco rosado suave */
+      
+      --brand-green: #2e5a44;  /* Verde salvia corporativo */
+      --brand-green-hover: #234534;
+      --accent-terracota: #D97736; /* Acento cálido */
     }
 
     * {
@@ -46,7 +54,7 @@
       justify-content: center;
       align-items: center;
       min-height: 100vh;
-      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      font-family: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
       padding: 20px 10px 40px 10px;
       position: relative;
       overflow-x: hidden;
@@ -58,7 +66,7 @@
       100% { background-position: 0% 50%; }
     }
 
-    /* IMAGEN DE FONDO (HOJAS CON BLUR) */
+    /* IMAGEN DE FONDO (HOJAS CON BLUR SUTIL) */
     body::before {
       content: "";
       position: fixed;
@@ -72,19 +80,34 @@
       background-size: contain;
       pointer-events: none;
       z-index: 0;
-      opacity: 0.15;
+      opacity: 0.10; /* Reducido levemente para dar más contraste al catálogo */
       filter: blur(8px);
     }
 
-    .catalog-title-container, .zoom-hint, .flipbook-container, .controls, .bottom-image-container, .social-links {
+    .season-badge, .catalog-title-container, .zoom-hint, .flipbook-container, .controls, .bottom-image-container, .social-links {
       position: relative;
       z-index: 1;
+    }
+
+    /* BADGE DE TEMPORADA */
+    .season-badge {
+      background-color: #ffffff;
+      color: var(--brand-green);
+      font-size: 0.72rem;
+      font-weight: 700;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      padding: 6px 16px;
+      border-radius: 20px;
+      margin-bottom: 12px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.04);
+      border: 1px solid rgba(46, 90, 68, 0.15);
     }
     
     .catalog-title-container {
       width: 100%;
-      max-width: 520px; 
-      margin-bottom: 8px;
+      max-width: 480px; 
+      margin-bottom: 6px;
       display: flex;
       justify-content: center;
     }
@@ -97,10 +120,11 @@
     }
 
     .zoom-hint {
-      color: #5c4b4e;
-      font-size: 0.85rem;
-      margin-bottom: 18px;
+      color: #6e5b5e;
+      font-size: 0.82rem;
+      margin-bottom: 20px;
       text-align: center;
+      font-weight: 500;
     }
 
     .flipbook-container {
@@ -109,14 +133,16 @@
       align-items: center;
       width: 100%;
       max-width: 550px;
-      margin-bottom: 20px;
+      margin-bottom: 24px;
     }
 
+    /* TARJETA FLOTANTE TIPO CATÁLOGO DE IMPRENTA */
     #flipbook {
-      box-shadow: 0 16px 38px rgba(0,0,0,0.12);
-      border-radius: 8px;
+      box-shadow: 0 18px 45px rgba(0,0,0,0.10); /* Sombra elegante estilo papel */
+      border-radius: 12px;
       overflow: hidden;
       touch-action: pan-y;
+      background-color: #ffffff;
     }
 
     .page {
@@ -143,37 +169,41 @@
       display: flex;
       justify-content: center;
       align-items: center;
-      gap: 12px;
+      gap: 16px;
       width: 100%;
-      margin-bottom: 18px;
+      margin-bottom: 22px;
     }
 
     .btn {
-      background: #2e5a44;
+      background: var(--brand-green);
       color: #ffffff;
       border: none;
-      padding: 12px 28px;
+      padding: 10px 24px;
       border-radius: 25px;
       font-weight: 600;
-      font-size: 0.95rem;
+      font-size: 0.9rem;
       cursor: pointer;
-      box-shadow: 0 4px 12px rgba(46, 90, 68, 0.2);
+      box-shadow: 0 4px 14px rgba(46, 90, 68, 0.18);
       transition: all 0.2s ease;
+      display: flex;
+      align-items: center;
+      gap: 8px;
     }
 
     .btn:hover {
-      background: #234534;
+      background: var(--brand-green-hover);
       transform: translateY(-2px);
+      box-shadow: 0 6px 18px rgba(46, 90, 68, 0.25);
     }
 
-    /* TAMAÑO DE LA IMAGEN INFERIOR */
+    /* LOGO INFERIOR */
     .bottom-image-container {
       width: 100%;
-      max-width: 220px;
+      max-width: 190px;
       display: flex;
       justify-content: center;
       margin-top: 5px;
-      margin-bottom: 15px;
+      margin-bottom: 18px;
     }
 
     .bottom-img {
@@ -183,54 +213,53 @@
       display: block;
     }
 
-    /* ESTILOS ICONOS REDES SOCIALES */
+    /* ICONOS DE REDES SOCIALES */
     .social-links {
       display: flex;
       justify-content: center;
       align-items: center;
-      gap: 18px;
+      gap: 16px;
       margin-top: 5px;
     }
 
     .social-icon {
-      width: 44px;
-      height: 44px;
+      width: 42px;
+      height: 42px;
       border-radius: 50%;
       background-color: #ffffff;
-      color: #2e5a44;
+      color: var(--brand-green);
       display: flex;
       justify-content: center;
       align-items: center;
-      font-size: 1.3rem;
+      font-size: 1.2rem;
       text-decoration: none;
-      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+      box-shadow: 0 4px 12px rgba(0,0,0,0.06);
+      border: 1px solid rgba(0, 0, 0, 0.04);
       transition: all 0.2s ease;
     }
 
     .social-icon:hover {
-      background-color: #2e5a44;
+      background-color: var(--brand-green);
       color: #ffffff;
       transform: translateY(-3px);
-      box-shadow: 0 6px 14px rgba(0,0,0,0.15);
+      box-shadow: 0 6px 16px rgba(46, 90, 68, 0.2);
     }
 
-    /* =========================================================
-       BOTÓN FLOTANTE WHATSAPP CON ANIMACIÓN CADA 5 SEGUNDOS
-       ========================================================= */
+    /* BOTÓN FLOTANTE WHATSAPP */
     .whatsapp-btn {
       position: fixed;
       bottom: 24px;
       right: 24px;
-      width: 58px;
-      height: 58px;
+      width: 56px;
+      height: 56px;
       background-color: #25d366;
       color: #ffffff;
       border-radius: 50%;
       display: flex;
       justify-content: center;
       align-items: center;
-      font-size: 1.9rem;
-      box-shadow: 0 6px 18px rgba(37, 211, 102, 0.45);
+      font-size: 1.8rem;
+      box-shadow: 0 6px 20px rgba(37, 211, 102, 0.4);
       z-index: 99;
       text-decoration: none;
       transition: background-color 0.3s ease;
@@ -238,43 +267,34 @@
     }
 
     .whatsapp-btn:hover {
-      animation-play-state: paused; /* Pausa el rebote al pasar el mouse sobre él */
-      transform: scale(1.1);
-      box-shadow: 0 8px 22px rgba(37, 211, 102, 0.6);
+      animation-play-state: paused;
+      transform: scale(1.08);
+      box-shadow: 0 8px 24px rgba(37, 211, 102, 0.55);
       color: #ffffff;
     }
 
-    /* Keyframes para el rebote dinámico cada 5 segundos */
     @keyframes whatsappBounce {
-      0%, 20%, 100% {
-        transform: translateY(0) scale(1);
-      }
-      5% {
-        transform: translateY(-14px) scale(1.05);
-      }
-      10% {
-        transform: translateY(0) scale(0.98);
-      }
-      15% {
-        transform: translateY(-7px) scale(1.02);
-      }
+      0%, 20%, 100% { transform: translateY(0) scale(1); }
+      5% { transform: translateY(-12px) scale(1.04); }
+      10% { transform: translateY(0) scale(0.98); }
+      15% { transform: translateY(-6px) scale(1.02); }
     }
 
     @media (max-width: 600px) {
       .catalog-title-container {
-        max-width: 90vw;
+        max-width: 88vw;
       }
       .bottom-image-container {
-        max-width: 180px;
+        max-width: 160px;
       }
       .btn {
-        padding: 10px 22px;
-        font-size: 0.9rem;
+        padding: 9px 20px;
+        font-size: 0.85rem;
       }
       .whatsapp-btn {
-        width: 52px;
-        height: 52px;
-        font-size: 1.7rem;
+        width: 50px;
+        height: 50px;
+        font-size: 1.6rem;
         bottom: 18px;
         right: 18px;
       }
@@ -282,6 +302,11 @@
   </style>
 </head>
 <body>
+
+  <!-- BADGE TEMÁTICO DE TEMPORADA -->
+  <div class="season-badge">
+    Edición Amor & Amistad
+  </div>
 
   <!-- Título principal -->
   <div class="catalog-title-container">
@@ -360,7 +385,7 @@
   </div>
 
   <!-- Botón Flotante de WhatsApp -->
-  <a href="https://wa.me/573216464169?text=Hola!%20👋%20Vengo%20del%20catálogo%20interactivo%20y%20me%20gustaría%20más%20información." target="_blank" class="whatsapp-btn" title="Contactar por WhatsApp">
+  <a href="https://wa.me/573000000000?text=Hola!%20👋%20Vengo%20del%20catálogo%20interactivo%20y%20me%20gustaría%20más%20información." target="_blank" class="whatsapp-btn" title="Contactar por WhatsApp">
     <i class="fa-brands fa-whatsapp"></i>
   </a>
 
