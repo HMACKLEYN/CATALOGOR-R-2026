@@ -26,18 +26,24 @@
   
   <style>
     /* =========================================================
-       PALETA TEMPORADA: AMOR Y AMISTAD (SOFT BLUSH & CONCRETE)
+       1. VARIABLES EDITABLES (PALETA Y CONFIGURACIÓN GLOBAL)
        ========================================================= */
     :root {
+      /* Fondo animado Amor y Amistad */
       --color-1: #F9F0EE; /* Nude / Rosa Lino ultra suave */
       --color-2: #F3E5E3; /* Rosa cuarzo desaturado */
       --color-3: #EFE0DD; /* Tono lino cálido */
       --color-4: #F7EBE8; /* Blanco rosado suave */
       
-      --brand-green: #2e5a44;    /* Verde salvia corporativo */
+      /* Marca y acentos */
+      --brand-green: #2e5a44;       /* Verde salvia corporativo */
       --brand-green-hover: #234534;
-      --accent-terracota: #D9825B; /* Tono acento */
-      --text-dark: #332B2C;
+      --accent-terracota: #D9825B;  /* Tono acento */
+      --text-dark: #332B2C;         /* Color principal del texto */
+
+      /* Alturas de Header */
+      --header-height-desktop: 75px;
+      --header-height-mobile: 65px;
     }
 
     * {
@@ -55,7 +61,7 @@
       align-items: center;
       min-height: 100vh;
       font-family: 'Poppins', sans-serif;
-      padding-top: 95px; /* Espacio para el header fijo */
+      padding-top: calc(var(--header-height-desktop) + 20px);
       padding-bottom: 20px;
       position: relative;
       overflow-x: hidden;
@@ -68,7 +74,7 @@
       100% { background-position: 0% 50%; }
     }
 
-    /* IMAGEN DE FONDO (HOJAS CON BLUR SUTIL) */
+    /* Imagen de fondo (hojas con blur sutil) */
     body::before {
       content: "";
       position: fixed;
@@ -91,13 +97,15 @@
       z-index: 1;
     }
 
-    /* ================= HEADER FIJO SUPERIOR ================= */
+    /* =========================================================
+       2. HEADER FIJO SUPERIOR (PERSONALIZABLE)
+       ========================================================= */
     .main-header {
       position: fixed;
       top: 0;
       left: 0;
       width: 100%;
-      height: 75px;
+      height: var(--header-height-desktop);
       background: rgba(255, 255, 255, 0.90);
       backdrop-filter: blur(10px);
       display: grid;
@@ -113,8 +121,14 @@
     .header-center { display: flex; justify-content: center; }
     .header-right { display: flex; justify-content: flex-end; align-items: center; }
 
-    .logo-header-img { height: 42px; width: auto; object-fit: contain; }
+    /* Logo del Header */
+    .logo-header-img { 
+      height: 42px; 
+      width: auto; 
+      object-fit: contain; 
+    }
 
+    /* Botón "COTIZAR" */
     .btn-cotizar {
       background: var(--brand-green);
       color: #ffffff;
@@ -135,7 +149,7 @@
       transform: translateY(-1px);
     }
 
-    /* MENÚ DESPLEGABLE DE NAVEGACIÓN */
+    /* Menú Desplegable "COLECCIONES" */
     .nav-menu { position: relative; }
     
     .menu-btn {
@@ -184,7 +198,9 @@
 
     .nav-menu:hover .dropdown-content { display: block; }
 
-    /* ================= ENCABEZADO EDITORIAL CON TEXTO REAL ================= */
+    /* =========================================================
+       3. ENCABEZADO EDITORIAL TIPO REVISTA (AJUSTE DE TEXTOS)
+       ========================================================= */
     .header-editorial {
       text-align: center;
       margin-bottom: 12px;
@@ -193,6 +209,7 @@
       align-items: center;
     }
 
+    /* Badge "Edición Amor & Amistad" */
     .season-badge {
       background-color: #ffffff;
       color: var(--brand-green);
@@ -207,7 +224,7 @@
       border: 1px solid rgba(46, 90, 68, 0.15);
     }
 
-    /* ESTRUCTURA TIPOGRÁFICA TIPO REVISTA EDITORIAL */
+    /* Estructura del Título Principal */
     .magazine-title {
       display: flex;
       flex-direction: column;
@@ -216,6 +233,7 @@
       margin-bottom: 6px;
     }
 
+    /* "CATÁLOGO" */
     .magazine-title .title-main {
       font-size: 2.8rem;
       font-weight: 800;
@@ -223,9 +241,10 @@
       color: #ffffff;
       text-shadow: 0 2px 10px rgba(0,0,0,0.06);
       text-transform: uppercase;
-      margin-right: -12px; /* Compensación visual del letter-spacing */
+      margin-right: -12px;
     }
 
+    /* "Materas de Cemento" */
     .magazine-title .title-sub {
       font-size: 0.85rem;
       font-weight: 500;
@@ -237,6 +256,7 @@
       margin-right: -6px;
     }
 
+    /* "2026" */
     .magazine-title .title-year {
       font-size: 1.8rem;
       font-weight: 300;
@@ -253,7 +273,9 @@
       font-weight: 500;
     }
 
-    /* ================= FLIPBOOK CONTAINER ================= */
+    /* =========================================================
+       4. FLIPBOOK Y CONTROLES
+       ========================================================= */
     .flipbook-container {
       display: flex;
       justify-content: center;
@@ -291,7 +313,6 @@
       z-index: 10;
     }
 
-    /* CONTROLES DE NAVEGACIÓN */
     .controls {
       display: flex;
       justify-content: center;
@@ -324,7 +345,9 @@
       box-shadow: 0 6px 18px rgba(46, 90, 68, 0.25);
     }
 
-    /* ================= MODAL FORMULARIO DE COTIZACIÓN ================= */
+    /* =========================================================
+       5. MODAL FORMULARIO DE COTIZACIÓN
+       ========================================================= */
     .modal-overlay {
       display: none;
       position: fixed;
@@ -383,7 +406,9 @@
 
     .btn-submit:hover { background: var(--brand-green-hover); }
 
-    /* ================= FOOTER ORGANIZADO ================= */
+    /* =========================================================
+       6. FOOTER Y REDES SOCIALES (PERSONALIZABLE)
+       ========================================================= */
     .main-footer {
       width: 100%;
       margin-top: auto;
@@ -439,7 +464,7 @@
       box-shadow: 0 6px 16px rgba(46, 90, 68, 0.2);
     }
 
-    /* BOTÓN FLOTANTE WHATSAPP */
+    /* Botón Flotante de WhatsApp */
     .whatsapp-btn {
       position: fixed;
       bottom: 24px;
@@ -474,15 +499,25 @@
       15% { transform: translateY(-6px) scale(1.02); }
     }
 
+    /* =========================================================
+       7. RESPONSIVE / ADAPTACIÓN MÓVIL
+       ========================================================= */
     @media (max-width: 600px) {
-      .main-header { padding: 0 15px; height: 65px; }
-      body { padding-top: 80px; }
+      .main-header { 
+        padding: 0 15px; 
+        height: var(--header-height-mobile); 
+      }
+      body { 
+        padding-top: calc(var(--header-height-mobile) + 15px); 
+      }
       .logo-header-img { height: 32px; }
       .btn-cotizar { padding: 7px 14px; font-size: 0.72rem; }
       .menu-btn { font-size: 0.78rem; padding: 6px 8px; }
+      
       .magazine-title .title-main { font-size: 2.1rem; letter-spacing: 8px; }
       .magazine-title .title-sub { font-size: 0.72rem; letter-spacing: 4px; }
       .magazine-title .title-year { font-size: 1.4rem; letter-spacing: 6px; }
+      
       .bottom-image-container { max-width: 150px; }
       .btn { padding: 9px 20px; font-size: 0.85rem; }
       .whatsapp-btn { width: 50px; height: 50px; font-size: 1.6rem; bottom: 18px; right: 18px; }
@@ -515,7 +550,7 @@
     </div>
   </header>
 
-  <!-- CABECERA EDITORIAL TIPO REVISTA EN TEXTO REAL -->
+  <!-- CABECERA EDITORIAL -->
   <header class="header-editorial">
     <div class="season-badge">
       Edición Amor & Amistad
@@ -575,7 +610,7 @@
     </div>
   </div>
 
-  <!-- CONTROLES DE ANTERIOR Y SIGUIENTE -->
+  <!-- CONTROLES -->
   <div class="controls">
     <button class="btn" id="prev">❮ Anterior</button>
     <button class="btn" id="next">Siguiente ❯</button>
@@ -587,7 +622,6 @@
       <span class="modal-close" id="closeModal">&times;</span>
       <h3 style="margin-bottom: 15px; color: var(--brand-green); text-align: center; font-weight: 700;">Solicitar Cotización</h3>
       
-      <!-- Formspree Endpoint -->
       <form action="https://formspree.io/f/TU_FORM_ID" method="POST">
         <div class="form-group">
           <label>Nombre Completo</label>
@@ -610,7 +644,7 @@
     </div>
   </div>
 
-  <!-- FOOTER ORGANIZADO -->
+  <!-- FOOTER -->
   <footer class="main-footer">
     <div class="bottom-image-container">
       <img src="LOGOFINAL.png" alt="Información adicional Rocks & Roots" class="bottom-img">
@@ -665,7 +699,7 @@
       document.getElementById('prev').addEventListener('click', () => pageFlip.flipPrev());
       document.getElementById('next').addEventListener('click', () => pageFlip.flipNext());
 
-      // ENLACES INTERNOS EN PÁGINAS INDICE
+      // Enlaces internos en páginas de índice
       document.querySelectorAll('.index-link').forEach(link => {
         link.addEventListener('click', (e) => {
           e.stopPropagation();
@@ -674,7 +708,7 @@
         });
       });
 
-      // EVENTOS DE ZOOM EN IMÁGENES
+      // Detección de doble clic/toque para abrir imagen
       let lastTap = 0;
 
       function openImageInNewTab(imgSrc) {
@@ -700,7 +734,7 @@
         }
       });
 
-      // GESTIÓN DEL MODAL DE COTIZACIÓN
+      // Modal de Cotización
       const modal = document.getElementById('cotizarModal');
       document.getElementById('openModal').addEventListener('click', (e) => {
         e.preventDefault();
@@ -714,7 +748,7 @@
       });
     });
 
-    // FUNCIÓN DE PASO RÁPIDO ANIMADO PARA MENÚ DE COLECCIONES
+    // Función de paso rápido animado para el menú de colecciones
     function goFastToPage(targetPageZeroBased) {
       if (!pageFlip) return;
       
