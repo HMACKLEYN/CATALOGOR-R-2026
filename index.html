@@ -26,24 +26,33 @@
   
   <style>
     /* =========================================================
-       1. VARIABLES EDITABLES (PALETA Y CONFIGURACIÓN GLOBAL)
+       PANEL DE EDICIÓN DE COLORES (EDITA TUS COLORES AQUÍ)
        ========================================================= */
     :root {
-      /* Fondo animado Amor y Amistad */
-      --color-1: #F9F0EE; /* Nude / Rosa Lino ultra suave */
-      --color-2: #F3E5E3; /* Rosa cuarzo desaturado */
-      --color-3: #EFE0DD; /* Tono lino cálido */
-      --color-4: #F7EBE8; /* Blanco rosado suave */
+      /* Colores del Fondo Animado */
+      --color-fondo-1: #F9F0EE; /* Rosa Lino suave */
+      --color-fondo-2: #F3E5E3; /* Rosa cuarzo desaturado */
+      --color-fondo-3: #EFE0DD; /* Tono lino cálido */
+      --color-fondo-4: #F7EBE8; /* Blanco rosado suave */
       
-      /* Marca y acentos */
-      --brand-green: #2e5a44;       /* Verde salvia corporativo */
-      --brand-green-hover: #234534;
-      --accent-terracota: #D9825B;  /* Tono acento */
-      --text-dark: #332B2C;         /* Color principal del texto */
+      /* Marca y Botones Principal */
+      --brand-green: #2e5a44;       /* Verde principal (Header, botones, menú) */
+      --brand-green-hover: #234534; /* Verde oscuro para efecto hover */
+      --accent-terracota: #D9825B;  /* Color del año '2026' y acentos */
 
-      /* Alturas de Header */
-      --header-height-desktop: 75px;
-      --header-height-mobile: 65px;
+      /* Header y Elementos */
+      --bg-header: rgba(255, 255, 255, 0.90); /* Fondo con transparencia del Header */
+      --borde-header: rgba(217, 130, 91, 0.15);/* Línea inferior del Header */
+      
+      /* Textos */
+      --color-titulo-principal: #ffffff; /* Color de la palabra 'CATÁLOGO' */
+      --color-subtitulo-revista: #2e5a44; /* Color de 'Materas de Cemento' */
+      --text-dark: #332B2C;               /* Color de textos generales */
+
+      /* Footer e Iconos */
+      --bg-footer: rgba(255, 255, 255, 0.40); /* Fondo del Footer */
+      --bg-social-icon: #ffffff;             /* Fondo de los círculos de redes */
+      --color-social-icon: #2e5a44;          /* Iconos de redes sociales */
     }
 
     * {
@@ -53,7 +62,7 @@
     }
     
     body {
-      background: linear-gradient(-45deg, var(--color-1), var(--color-2), var(--color-3), var(--color-4));
+      background: linear-gradient(-45deg, var(--color-fondo-1), var(--color-fondo-2), var(--color-fondo-3), var(--color-fondo-4));
       background-size: 400% 400%;
       animation: gradientBG 18s ease infinite;
       display: flex;
@@ -61,7 +70,7 @@
       align-items: center;
       min-height: 100vh;
       font-family: 'Poppins', sans-serif;
-      padding-top: calc(var(--header-height-desktop) + 20px);
+      padding-top: 95px;
       padding-bottom: 20px;
       position: relative;
       overflow-x: hidden;
@@ -74,7 +83,7 @@
       100% { background-position: 0% 50%; }
     }
 
-    /* Imagen de fondo (hojas con blur sutil) */
+    /* IMAGEN DE FONDO DE HOJAS CON BLUR */
     body::before {
       content: "";
       position: fixed;
@@ -97,16 +106,14 @@
       z-index: 1;
     }
 
-    /* =========================================================
-       2. HEADER FIJO SUPERIOR (PERSONALIZABLE)
-       ========================================================= */
+    /* ================= HEADER FIJO SUPERIOR ================= */
     .main-header {
       position: fixed;
       top: 0;
       left: 0;
       width: 100%;
-      height: var(--header-height-desktop);
-      background: rgba(255, 255, 255, 0.90);
+      height: 75px;
+      background: var(--bg-header);
       backdrop-filter: blur(10px);
       display: grid;
       grid-template-columns: 1fr auto 1fr;
@@ -114,21 +121,15 @@
       padding: 0 40px;
       box-shadow: 0 2px 15px rgba(0,0,0,0.04);
       z-index: 100;
-      border-bottom: 1px solid rgba(217, 130, 91, 0.15);
+      border-bottom: 1px solid var(--borde-header);
     }
 
     .header-left { display: flex; justify-content: flex-start; }
     .header-center { display: flex; justify-content: center; }
     .header-right { display: flex; justify-content: flex-end; align-items: center; }
 
-    /* Logo del Header */
-    .logo-header-img { 
-      height: 42px; 
-      width: auto; 
-      object-fit: contain; 
-    }
+    .logo-header-img { height: 42px; width: auto; object-fit: contain; }
 
-    /* Botón "COTIZAR" */
     .btn-cotizar {
       background: var(--brand-green);
       color: #ffffff;
@@ -141,7 +142,7 @@
       cursor: pointer;
       text-decoration: none;
       transition: all 0.2s ease;
-      box-shadow: 0 4px 12px rgba(46, 90, 68, 0.18);
+      box-shadow: 0 4px 12px rgba(0,0,0,0.08);
     }
 
     .btn-cotizar:hover {
@@ -149,7 +150,7 @@
       transform: translateY(-1px);
     }
 
-    /* Menú Desplegable "COLECCIONES" */
+    /* MENÚ DESPLEGABLE */
     .nav-menu { position: relative; }
     
     .menu-btn {
@@ -177,7 +178,7 @@
       box-shadow: 0 10px 28px rgba(0,0,0,0.1);
       border-radius: 12px;
       overflow: hidden;
-      border: 1px solid rgba(46, 90, 68, 0.1);
+      border: 1px solid rgba(0, 0, 0, 0.05);
       z-index: 110;
     }
 
@@ -192,15 +193,13 @@
     }
 
     .dropdown-content a:hover {
-      background-color: var(--color-1);
+      background-color: var(--color-fondo-1);
       color: var(--brand-green);
     }
 
     .nav-menu:hover .dropdown-content { display: block; }
 
-    /* =========================================================
-       3. ENCABEZADO EDITORIAL TIPO REVISTA (AJUSTE DE TEXTOS)
-       ========================================================= */
+    /* ================= ENCABEZADO EDITORIAL ================= */
     .header-editorial {
       text-align: center;
       margin-bottom: 12px;
@@ -209,7 +208,6 @@
       align-items: center;
     }
 
-    /* Badge "Edición Amor & Amistad" */
     .season-badge {
       background-color: #ffffff;
       color: var(--brand-green);
@@ -221,10 +219,9 @@
       border-radius: 20px;
       margin-bottom: 12px;
       box-shadow: 0 4px 12px rgba(0,0,0,0.04);
-      border: 1px solid rgba(46, 90, 68, 0.15);
+      border: 1px solid rgba(0,0,0,0.05);
     }
 
-    /* Estructura del Título Principal */
     .magazine-title {
       display: flex;
       flex-direction: column;
@@ -233,30 +230,27 @@
       margin-bottom: 6px;
     }
 
-    /* "CATÁLOGO" */
     .magazine-title .title-main {
       font-size: 2.8rem;
       font-weight: 800;
       letter-spacing: 12px;
-      color: #ffffff;
+      color: var(--color-titulo-principal);
       text-shadow: 0 2px 10px rgba(0,0,0,0.06);
       text-transform: uppercase;
       margin-right: -12px;
     }
 
-    /* "Materas de Cemento" */
     .magazine-title .title-sub {
       font-size: 0.85rem;
       font-weight: 500;
       letter-spacing: 6px;
-      color: var(--brand-green);
+      color: var(--color-subtitulo-revista);
       text-transform: uppercase;
       margin-top: 4px;
       margin-bottom: 4px;
       margin-right: -6px;
     }
 
-    /* "2026" */
     .magazine-title .title-year {
       font-size: 1.8rem;
       font-weight: 300;
@@ -273,9 +267,7 @@
       font-weight: 500;
     }
 
-    /* =========================================================
-       4. FLIPBOOK Y CONTROLES
-       ========================================================= */
+    /* ================= FLIPBOOK ================= */
     .flipbook-container {
       display: flex;
       justify-content: center;
@@ -313,6 +305,7 @@
       z-index: 10;
     }
 
+    /* CONTROLES */
     .controls {
       display: flex;
       justify-content: center;
@@ -332,7 +325,7 @@
       font-size: 0.88rem;
       font-family: 'Poppins', sans-serif;
       cursor: pointer;
-      box-shadow: 0 4px 14px rgba(46, 90, 68, 0.18);
+      box-shadow: 0 4px 14px rgba(0,0,0,0.12);
       transition: all 0.2s ease;
       display: flex;
       align-items: center;
@@ -342,12 +335,10 @@
     .btn:hover {
       background: var(--brand-green-hover);
       transform: translateY(-2px);
-      box-shadow: 0 6px 18px rgba(46, 90, 68, 0.25);
+      box-shadow: 0 6px 18px rgba(0,0,0,0.18);
     }
 
-    /* =========================================================
-       5. MODAL FORMULARIO DE COTIZACIÓN
-       ========================================================= */
+    /* ================= MODAL DE COTIZACIÓN ================= */
     .modal-overlay {
       display: none;
       position: fixed;
@@ -385,7 +376,7 @@
     .form-group label { display: block; font-size: 0.8rem; font-weight: 600; margin-bottom: 5px; color: var(--text-dark); }
     .form-group input, .form-group textarea {
       width: 100%; padding: 10px 12px; border: 1px solid #E2D8D6; border-radius: 8px; font-family: 'Poppins', sans-serif; font-size: 0.88rem;
-      outline: none; transition: border-color 0.2s; background: var(--color-1);
+      outline: none; transition: border-color 0.2s; background: var(--color-fondo-1);
     }
     .form-group input:focus, .form-group textarea:focus { border-color: var(--brand-green); background: #ffffff; }
 
@@ -406,14 +397,13 @@
 
     .btn-submit:hover { background: var(--brand-green-hover); }
 
-    /* =========================================================
-       6. FOOTER Y REDES SOCIALES (PERSONALIZABLE)
-       ========================================================= */
+    /* ================= FOOTER ================= */
     .main-footer {
       width: 100%;
       margin-top: auto;
       padding: 20px;
       text-align: center;
+      background: var(--bg-footer);
       display: flex;
       flex-direction: column;
       align-items: center;
@@ -445,8 +435,8 @@
       width: 42px;
       height: 42px;
       border-radius: 50%;
-      background-color: #ffffff;
-      color: var(--brand-green);
+      background-color: var(--bg-social-icon);
+      color: var(--color-social-icon);
       display: flex;
       justify-content: center;
       align-items: center;
@@ -461,10 +451,10 @@
       background-color: var(--brand-green);
       color: #ffffff;
       transform: translateY(-3px);
-      box-shadow: 0 6px 16px rgba(46, 90, 68, 0.2);
+      box-shadow: 0 6px 16px rgba(0, 0, 0, 0.15);
     }
 
-    /* Botón Flotante de WhatsApp */
+    /* BOTÓN FLOTANTE WHATSAPP */
     .whatsapp-btn {
       position: fixed;
       bottom: 24px;
@@ -499,25 +489,15 @@
       15% { transform: translateY(-6px) scale(1.02); }
     }
 
-    /* =========================================================
-       7. RESPONSIVE / ADAPTACIÓN MÓVIL
-       ========================================================= */
     @media (max-width: 600px) {
-      .main-header { 
-        padding: 0 15px; 
-        height: var(--header-height-mobile); 
-      }
-      body { 
-        padding-top: calc(var(--header-height-mobile) + 15px); 
-      }
+      .main-header { padding: 0 15px; height: 65px; }
+      body { padding-top: 80px; }
       .logo-header-img { height: 32px; }
       .btn-cotizar { padding: 7px 14px; font-size: 0.72rem; }
       .menu-btn { font-size: 0.78rem; padding: 6px 8px; }
-      
       .magazine-title .title-main { font-size: 2.1rem; letter-spacing: 8px; }
       .magazine-title .title-sub { font-size: 0.72rem; letter-spacing: 4px; }
       .magazine-title .title-year { font-size: 1.4rem; letter-spacing: 6px; }
-      
       .bottom-image-container { max-width: 150px; }
       .btn { padding: 9px 20px; font-size: 0.85rem; }
       .whatsapp-btn { width: 50px; height: 50px; font-size: 1.6rem; bottom: 18px; right: 18px; }
@@ -550,7 +530,7 @@
     </div>
   </header>
 
-  <!-- CABECERA EDITORIAL -->
+  <!-- CABECERA EDITORIAL TIPO REVISTA EN TEXTO REAL -->
   <header class="header-editorial">
     <div class="season-badge">
       Edición Amor & Amistad
@@ -565,7 +545,7 @@
 
   <p class="zoom-hint">🔍 Haz doble clic / toque para ver la imagen completa</p>
 
-  <!-- FLIPBOOK CON TODAS LAS PÁGINAS (PÁGINA 1 A 31) -->
+  <!-- FLIPBOOK CON TODAS LAS PÁGINAS (1 A 31) -->
   <div class="flipbook-container">
     <div id="flipbook">
       
@@ -616,7 +596,7 @@
     <button class="btn" id="next">Siguiente ❯</button>
   </div>
 
-  <!-- MODAL FORMULARIO DE COTIZACIÓN -->
+  <!-- MODAL DE COTIZACIÓN -->
   <div class="modal-overlay" id="cotizarModal">
     <div class="modal-content">
       <span class="modal-close" id="closeModal">&times;</span>
@@ -699,7 +679,6 @@
       document.getElementById('prev').addEventListener('click', () => pageFlip.flipPrev());
       document.getElementById('next').addEventListener('click', () => pageFlip.flipNext());
 
-      // Enlaces internos en páginas de índice
       document.querySelectorAll('.index-link').forEach(link => {
         link.addEventListener('click', (e) => {
           e.stopPropagation();
@@ -708,7 +687,6 @@
         });
       });
 
-      // Detección de doble clic/toque para abrir imagen
       let lastTap = 0;
 
       function openImageInNewTab(imgSrc) {
@@ -734,7 +712,6 @@
         }
       });
 
-      // Modal de Cotización
       const modal = document.getElementById('cotizarModal');
       document.getElementById('openModal').addEventListener('click', (e) => {
         e.preventDefault();
@@ -748,7 +725,6 @@
       });
     });
 
-    // Función de paso rápido animado para el menú de colecciones
     function goFastToPage(targetPageZeroBased) {
       if (!pageFlip) return;
       
