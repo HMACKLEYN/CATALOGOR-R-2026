@@ -26,33 +26,33 @@
   
   <style>
     /* =========================================================
-       PANEL DE EDICIÓN DE COLORES - HALLOWEEN BOTÁNICO
+       PANEL DE EDICIÓN DE COLORES - HALLOWEEN BOTÁNICO SUAVE
        ========================================================= */
     :root {
-      /* Colores del Fondo Animado (Tonos cálidos y místico-mórbidos) */
-      --color-fondo-1: #1a1618; /* Carbón suave con tinte cálido */
-      --color-fondo-2: #2d1a24; /* Morado noche místico */
-      --color-fondo-3: #221410; /* Terracota oscuro */
-      --color-fondo-4: #151214; /* Negro ceniza */
+      /* Colores del Fondo Animado (Lino, Beige Cálido y Gris Suave) */
+      --color-fondo-1: #F5F2EB; /* Lino / Crema suave */
+      --color-fondo-2: #EBE5DB; /* Beige cemento claro */
+      --color-fondo-3: #E3DDD3; /* Gris piedra cálido */
+      --color-fondo-4: #F0EAE1; /* Marfil sutil */
       
-      /* Marca y Botones Principal (Naranja Calabaza & Terracota Quemado) */
-      --brand-green: #d96b27;       /* Naranja calabaza vibrante */
-      --brand-green-hover: #b85419; /* Naranja terracota profundo para hover */
-      --accent-terracota: #e28743;  /* Acento naranja ámbar cálido para '2026' */
+      /* Marca y Botones Principal (Verde Salvia / Olivo Pálido) */
+      --brand-green: #68745d;       /* Verde salvia / olivo sobrio */
+      --brand-green-hover: #54604a; /* Verde olivo más profundo para hover */
+      --accent-terracota: #D9825B;  /* Naranja terracota sutil para '2026' y acentos */
 
       /* Header y Elementos */
-      --bg-header: rgba(26, 22, 24, 0.92); /* Encabezado semi-transparente carbón */
-      --borde-header: rgba(217, 107, 39, 0.25); /* Línea inferior naranja tenue */
+      --bg-header: rgba(235, 229, 219, 0.92); /* Encabezado semi-transparente beige */
+      --borde-header: rgba(104, 116, 93, 0.20); /* Línea inferior verde salvia */
       
       /* Textos */
-      --color-titulo-principal: #f0833a; /* Naranja cálido brillante */
-      --color-subtitulo-revista: #d4a373; /* Tono arena / hueso cálido */
-      --text-dark: #e6d7ce;               /* Texto claro cremoso para legibilidad */
+      --color-titulo-principal: #5a6452; /* Verde musgo pálido / grisáceo */
+      --color-subtitulo-revista: #a27255; /* Terracota cálido suave */
+      --text-dark: #5c5550;               /* Gris piedra oscuro para excelente lectura */
 
       /* Footer e Iconos */
-      --bg-footer: rgba(20, 16, 18, 0.95);
-      --bg-social-icon: #2a2226;          /* Fondo oscuro para círculos de redes */
-      --color-social-icon: #f0833a;       /* Iconos naranja cálido */
+      --bg-footer: rgba(227, 221, 211, 0.95);
+      --bg-social-icon: #ffffff;           /* Fondo blanco limpio para redes */
+      --color-social-icon: #68745d;        /* Iconos en verde salvia */
     }
 
     * {
@@ -97,8 +97,8 @@
       background-size: contain;
       pointer-events: none;
       z-index: 0;
-      opacity: 0.15;
-      filter: blur(8px) invert(0.2) sepia(0.8) hue-rotate(320deg); /* Efecto sutil para adaptar HOJAS.png */
+      opacity: 0.12;
+      filter: blur(6px) sepia(0.2) hue-rotate(40deg); /* Ajuste sutil para integrar con verdes y beiges */
     }
 
     .main-header, .header-editorial, .zoom-hint, .flipbook-container, .controls, .main-footer, .modal-overlay {
@@ -119,7 +119,7 @@
       grid-template-columns: 1fr auto 1fr;
       align-items: center;
       padding: 0 40px;
-      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
+      box-shadow: 0 2px 15px rgba(0, 0, 0, 0.05);
       z-index: 100;
       border-bottom: 1px solid var(--borde-header);
     }
@@ -142,13 +142,13 @@
       cursor: pointer;
       text-decoration: none;
       transition: all 0.2s ease;
-      box-shadow: 0 4px 12px rgba(217, 107, 39, 0.25);
+      box-shadow: 0 4px 12px rgba(104, 116, 93, 0.2);
     }
 
     .btn-cotizar:hover {
       background: var(--brand-green-hover);
       transform: translateY(-1px);
-      box-shadow: 0 6px 16px rgba(217, 107, 39, 0.4);
+      box-shadow: 0 6px 16px rgba(104, 116, 93, 0.3);
     }
 
     /* MENÚ DESPLEGABLE */
@@ -159,7 +159,7 @@
       border: none;
       font-size: 0.85rem;
       font-weight: 600;
-      color: #ffffff;
+      color: var(--brand-green);
       cursor: pointer;
       display: flex;
       align-items: center;
@@ -174,12 +174,12 @@
       position: absolute;
       right: 0;
       top: 100%;
-      background-color: #241d21;
+      background-color: #ffffff;
       min-width: 200px;
-      box-shadow: 0 10px 28px rgba(0, 0, 0, 0.5);
+      box-shadow: 0 10px 28px rgba(0, 0, 0, 0.08);
       border-radius: 12px;
       overflow: hidden;
-      border: 1px solid rgba(217, 107, 39, 0.2);
+      border: 1px solid rgba(104, 116, 93, 0.15);
       z-index: 110;
     }
 
@@ -194,7 +194,7 @@
     }
 
     .dropdown-content a:hover {
-      background-color: #33272d;
+      background-color: var(--color-fondo-1);
       color: var(--brand-green);
     }
 
@@ -210,8 +210,8 @@
     }
 
     .season-badge {
-      background-color: #281e23;
-      color: var(--brand-green);
+      background-color: #ffffff;
+      color: var(--accent-terracota);
       font-size: 0.72rem;
       font-weight: 700;
       letter-spacing: 2px;
@@ -219,8 +219,8 @@
       padding: 6px 18px;
       border-radius: 20px;
       margin-bottom: 12px;
-      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
-      border: 1px solid rgba(217, 107, 39, 0.3);
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.04);
+      border: 1px solid rgba(217, 130, 91, 0.25);
     }
 
     .magazine-title {
@@ -236,7 +236,7 @@
       font-weight: 800;
       letter-spacing: 12px;
       color: var(--color-titulo-principal);
-      text-shadow: 0 4px 15px rgba(0, 0, 0, 0.6);
+      text-shadow: 0 2px 10px rgba(0, 0, 0, 0.04);
       text-transform: uppercase;
       margin-right: -12px;
     }
@@ -261,7 +261,7 @@
     }
 
     .zoom-hint {
-      color: #c0a89d;
+      color: #7a726c;
       font-size: 0.8rem;
       margin-bottom: 18px;
       text-align: center;
@@ -279,7 +279,7 @@
     }
 
     #flipbook {
-      box-shadow: 0 20px 50px rgba(0, 0, 0, 0.6);
+      box-shadow: 0 18px 45px rgba(0, 0, 0, 0.10);
       border-radius: 12px;
       overflow: hidden;
       touch-action: pan-y;
@@ -326,7 +326,7 @@
       font-size: 0.88rem;
       font-family: 'Poppins', sans-serif;
       cursor: pointer;
-      box-shadow: 0 4px 14px rgba(0, 0, 0, 0.4);
+      box-shadow: 0 4px 14px rgba(0, 0, 0, 0.08);
       transition: all 0.2s ease;
       display: flex;
       align-items: center;
@@ -336,7 +336,7 @@
     .btn:hover {
       background: var(--brand-green-hover);
       transform: translateY(-2px);
-      box-shadow: 0 6px 18px rgba(217, 107, 39, 0.35);
+      box-shadow: 0 6px 18px rgba(0, 0, 0, 0.14);
     }
 
     /* ================= MODAL DE COTIZACIÓN ================= */
@@ -344,8 +344,8 @@
       display: none;
       position: fixed;
       top: 0; left: 0; width: 100%; height: 100%;
-      background: rgba(10, 8, 9, 0.75);
-      backdrop-filter: blur(8px);
+      background: rgba(60, 55, 50, 0.45);
+      backdrop-filter: blur(5px);
       z-index: 200;
       justify-content: center;
       align-items: center;
@@ -353,14 +353,14 @@
     }
 
     .modal-content {
-      background: #221a1e;
+      background: #ffffff;
       padding: 30px 25px;
       border-radius: 16px;
       width: 100%;
       max-width: 420px;
       position: relative;
-      box-shadow: 0 15px 40px rgba(0, 0, 0, 0.6);
-      border: 1px solid rgba(217, 107, 39, 0.3);
+      box-shadow: 0 15px 35px rgba(0, 0, 0, 0.12);
+      border: 1px solid rgba(104, 116, 93, 0.15);
     }
 
     .modal-close {
@@ -368,19 +368,19 @@
       top: 15px; right: 20px;
       font-size: 1.5rem;
       cursor: pointer;
-      color: #a08a80;
+      color: #888;
       transition: color 0.2s;
     }
 
-    .modal-close:hover { color: var(--brand-green); }
+    .modal-close:hover { color: var(--text-dark); }
 
     .form-group { margin-bottom: 14px; text-align: left; }
     .form-group label { display: block; font-size: 0.8rem; font-weight: 600; margin-bottom: 5px; color: var(--text-dark); }
     .form-group input, .form-group textarea {
-      width: 100%; padding: 10px 12px; border: 1px solid #44323a; border-radius: 8px; font-family: 'Poppins', sans-serif; font-size: 0.88rem;
-      outline: none; transition: border-color 0.2s; background: #181215; color: #ffffff;
+      width: 100%; padding: 10px 12px; border: 1px solid #DCD3C7; border-radius: 8px; font-family: 'Poppins', sans-serif; font-size: 0.88rem;
+      outline: none; transition: border-color 0.2s; background: var(--color-fondo-1); color: var(--text-dark);
     }
-    .form-group input:focus, .form-group textarea:focus { border-color: var(--brand-green); background: #261c21; }
+    .form-group input:focus, .form-group textarea:focus { border-color: var(--brand-green); background: #ffffff; }
 
     .btn-submit {
       width: 100%;
@@ -410,7 +410,7 @@
       flex-direction: column;
       align-items: center;
       gap: 14px;
-      border-top: 1px solid rgba(217, 107, 39, 0.15);
+      border-top: 1px solid rgba(104, 116, 93, 0.12);
     }
 
     .bottom-image-container {
@@ -445,8 +445,8 @@
       align-items: center;
       font-size: 1.2rem;
       text-decoration: none;
-      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
-      border: 1px solid rgba(217, 107, 39, 0.2);
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+      border: 1px solid rgba(104, 116, 93, 0.15);
       transition: all 0.2s ease;
     }
 
@@ -454,7 +454,7 @@
       background-color: var(--brand-green);
       color: #ffffff;
       transform: translateY(-3px);
-      box-shadow: 0 6px 16px rgba(217, 107, 39, 0.4);
+      box-shadow: 0 6px 16px rgba(0, 0, 0, 0.12);
     }
 
     /* BOTÓN FLOTANTE WHATSAPP */
@@ -471,7 +471,7 @@
       justify-content: center;
       align-items: center;
       font-size: 1.8rem;
-      box-shadow: 0 6px 20px rgba(37, 211, 102, 0.4);
+      box-shadow: 0 6px 20px rgba(37, 211, 102, 0.35);
       z-index: 99;
       text-decoration: none;
       transition: background-color 0.3s ease;
@@ -481,7 +481,7 @@
     .whatsapp-btn:hover {
       animation-play-state: paused;
       transform: scale(1.08);
-      box-shadow: 0 8px 24px rgba(37, 211, 102, 0.55);
+      box-shadow: 0 8px 24px rgba(37, 211, 102, 0.5);
       color: #ffffff;
     }
 
@@ -645,7 +645,7 @@
       </a>
     </div>
 
-    <p style="font-size: 0.75rem; color: #b09c93; margin-top: 4px;">© 2026 Rocks & Roots — Todos los derechos reservados.</p>
+    <p style="font-size: 0.75rem; color: #7a726c; margin-top: 4px;">© 2026 Rocks & Roots — Todos los derechos reservados.</p>
   </footer>
 
   <!-- BOTÓN FLOTANTE WHATSAPP -->
