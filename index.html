@@ -20,7 +20,7 @@
   <meta property="og:type" content="website">
   <meta property="og:title" content="Catálogo Materas de Cemento | Rocks & Roots">
   <meta property="og:description" content="Explora nuestro catálogo interactivo de materas de cemento y diseño botánico.">
-  <meta property="og:image" content="https://hmackleyn.github.io/CATALOGOR-R-2026/BANNER.jpg">
+  <meta property="og:image" content="https://hmackleyn.github.io/CATALOGOR-R-2026/BANNER.png">
   <meta property="og:image:width" content="1200">
   <meta property="og:image:height" content="630">
   
@@ -98,7 +98,7 @@
       pointer-events: none;
       z-index: 0;
       opacity: 0.12;
-      filter: blur(6px) sepia(0.2) hue-rotate(40deg); /* Ajuste sutil para integrar con verdes y beiges */
+      filter: blur(6px) sepia(0.2) hue-rotate(40deg);
     }
 
     .main-header, .header-editorial, .zoom-hint, .flipbook-container, .controls, .main-footer, .modal-overlay {
@@ -200,13 +200,34 @@
 
     .nav-menu:hover .dropdown-content { display: block; }
 
-    /* ================= ENCABEZADO EDITORIAL ================= */
+    /* ================= ENCABEZADO EDITORIAL CON ELEMENTOS GRÁFICOS ================= */
     .header-editorial {
       text-align: center;
       margin-bottom: 12px;
       display: flex;
       flex-direction: column;
       align-items: center;
+    }
+
+    .season-badge-wrapper {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 12px;
+    }
+
+    .badge-icon {
+      font-size: 0.95rem;
+      color: var(--accent-terracota);
+      opacity: 0.85;
+    }
+
+    .badge-icon.left {
+      transform: rotate(-15deg);
+    }
+
+    .badge-icon.right {
+      transform: rotate(15deg);
     }
 
     .season-badge {
@@ -218,9 +239,11 @@
       text-transform: uppercase;
       padding: 6px 18px;
       border-radius: 20px;
-      margin-bottom: 12px;
       box-shadow: 0 4px 12px rgba(0, 0, 0, 0.04);
       border: 1px solid rgba(217, 130, 91, 0.25);
+      display: flex;
+      align-items: center;
+      gap: 8px;
     }
 
     .magazine-title {
@@ -535,8 +558,12 @@
 
   <!-- CABECERA EDITORIAL TIPO REVISTA EN TEXTO REAL -->
   <header class="header-editorial">
-    <div class="season-badge">
-      Edición Especial Halloween
+    <div class="season-badge-wrapper">
+      <i class="fa-solid fa-leaf badge-icon left"></i>
+      <div class="season-badge">
+        <i class="fa-solid fa-pumpkin"></i> Edición Especial Halloween
+      </div>
+      <i class="fa-solid fa-leaf badge-icon right"></i>
     </div>
 
     <div class="magazine-title">
@@ -555,7 +582,12 @@
       <div class="page"><img src="PAGINA.jpg" alt="Portada" class="zoomable"></div>
       
       <div class="page">
+        <img src="PAGINA2.jpg" alt="Página 2" class="zoomable">
+        <div class="index-link" style="top: 30%; left: 10%; width: 80%; height: 8%;" data-page="1" title="Ir a Línea Gota"></div>
+        <div class="index-link" style="top: 40%; left: 10%; width: 80%; height: 8%;" data-page="5" title="Ir a Materas Redondas"></div>
+      </div>
 
+      <div class="page"><img src="PAGINA3.jpg" alt="Página 3" class="zoomable"></div>
       <div class="page"><img src="PAGINA4.jpg" alt="Página 4" class="zoomable"></div>
       <div class="page"><img src="PAGINA5.jpg" alt="Página 5" class="zoomable"></div>
       <div class="page"><img src="PAGINA6.jpg" alt="Página 6" class="zoomable"></div>
