@@ -29,30 +29,30 @@
        PANEL DE EDICIÓN DE COLORES - HALLOWEEN BOTÁNICO SUAVE
        ========================================================= */
     :root {
-      /* Colores del Fondo Animado (Lino, Beige Cálido y Gris Suave) */
-      --color-fondo-1: #F5F2EB; /* Lino / Crema suave */
-      --color-fondo-2: #EBE5DB; /* Beige cemento claro */
-      --color-fondo-3: #E3DDD3; /* Gris piedra cálido */
-      --color-fondo-4: #F0EAE1; /* Marfil sutil */
+      /* Colores del Fondo Animado */
+      --color-fondo-1: #F5F2EB; 
+      --color-fondo-2: #EBE5DB; 
+      --color-fondo-3: #E3DDD3; 
+      --color-fondo-4: #F0EAE1; 
       
-      /* Marca y Botones Principal (Verde Salvia / Olivo Pálido) */
-      --brand-green: #68745d;       /* Verde salvia / olivo sobrio */
-      --brand-green-hover: #54604a; /* Verde olivo más profundo para hover */
-      --accent-terracota: #D9825B;  /* Naranja terracota sutil para '2026' y acentos */
+      /* Marca y Botones Principal */
+      --brand-green: #68745d;       
+      --brand-green-hover: #54604a; 
+      --accent-terracota: #D9825B;  
 
       /* Header y Elementos */
-      --bg-header: rgba(235, 229, 219, 0.92); /* Encabezado semi-transparente beige */
-      --borde-header: rgba(104, 116, 93, 0.20); /* Línea inferior verde salvia */
+      --bg-header: rgba(235, 229, 219, 0.92); 
+      --borde-header: rgba(104, 116, 93, 0.20); 
       
       /* Textos */
-      --color-titulo-principal: #5a6452; /* Verde musgo pálido / grisáceo */
-      --color-subtitulo-revista: #a27255; /* Terracota cálido suave */
-      --text-dark: #5c5550;               /* Gris piedra oscuro para excelente lectura */
+      --color-titulo-principal: #5a6452; 
+      --color-subtitulo-revista: #a27255; 
+      --text-dark: #5c5550;               
 
       /* Footer e Iconos */
       --bg-footer: rgba(227, 221, 211, 0.95);
-      --bg-social-icon: #ffffff;           /* Fondo blanco limpio para redes */
-      --color-social-icon: #68745d;        /* Iconos en verde salvia */
+      --bg-social-icon: #ffffff;           
+      --color-social-icon: #68745d;        
     }
 
     * {
@@ -200,7 +200,7 @@
 
     .nav-menu:hover .dropdown-content { display: block; }
 
-    /* ================= ENCABEZADO EDITORIAL CON ELEMENTOS GRÁFICOS ================= */
+    /* ================= ENCABEZADO EDITORIAL ================= */
     .header-editorial {
       text-align: center;
       margin-bottom: 12px;
@@ -222,13 +222,8 @@
       opacity: 0.85;
     }
 
-    .badge-icon.left {
-      transform: rotate(-15deg);
-    }
-
-    .badge-icon.right {
-      transform: rotate(15deg);
-    }
+    .badge-icon.left { transform: rotate(-15deg); }
+    .badge-icon.right { transform: rotate(15deg); }
 
     .season-badge {
       background-color: #ffffff;
@@ -291,33 +286,37 @@
       font-weight: 500;
     }
 
-    /* ================= FLIPBOOK ================= */
+    /* ================= FLIPBOOK (AJUSTADO A TAMAÑO CARTA VERTICAL) ================= */
     .flipbook-container {
       display: flex;
       justify-content: center;
       align-items: center;
       width: 100%;
-      max-width: 550px;
+      max-width: 520px; /* Ancho máximo adaptado a hojas carta */
       margin-bottom: 22px;
     }
 
     #flipbook {
-      box-shadow: 0 18px 45px rgba(0, 0, 0, 0.10);
-      border-radius: 12px;
+      box-shadow: 0 18px 45px rgba(0, 0, 0, 0.12);
+      border-radius: 8px;
       overflow: hidden;
       touch-action: pan-y;
       background-color: #ffffff;
+      aspect-ratio: 1 / 1.294; /* Proporción 8.5" x 11" (Carta) */
+      width: 100%;
     }
 
     .page {
       background-color: #ffffff;
       position: relative;
+      width: 100%;
+      height: 100%;
     }
 
     .page img {
       width: 100%;
       height: 100%;
-      object-fit: contain;
+      object-fit: cover; /* Cubre completamente el área sin deformar */
       display: block;
       cursor: pointer;
     }
@@ -575,7 +574,7 @@
 
   <p class="zoom-hint">🔍 Haz doble clic / toque para ver la imagen completa</p>
 
-  <!-- FLIPBOOK CON TODAS LAS PÁGINAS (1 A 31) -->
+  <!-- FLIPBOOK CON TODAS LAS PÁGINAS (1 A 37) -->
   <div class="flipbook-container">
     <div id="flipbook">
       
@@ -616,12 +615,12 @@
       <div class="page"><img src="PAGINA29.jpg" alt="Página 29" class="zoomable"></div>
       <div class="page"><img src="PAGINA30.jpg" alt="Página 30" class="zoomable"></div>
       <div class="page"><img src="PAGINA31.jpg" alt="Página 31" class="zoomable"></div>
-       <div class="page"><img src="PAGINA32.jpg" alt="Página 32" class="zoomable"></div>
-       <div class="page"><img src="PAGINA33.jpg" alt="Página 33" class="zoomable"></div>
-       <div class="page"><img src="PAGINA34.jpg" alt="Página 34" class="zoomable"></div>
-       <div class="page"><img src="PAGINA35.jpg" alt="Página 35" class="zoomable"></div>
-       <div class="page"><img src="PAGINA36.jpg" alt="Página 36" class="zoomable"></div>
-       <div class="page"><img src="PAGINA37.jpg" alt="Página 37" class="zoomable"></div>
+      <div class="page"><img src="PAGINA32.jpg" alt="Página 32" class="zoomable"></div>
+      <div class="page"><img src="PAGINA33.jpg" alt="Página 33" class="zoomable"></div>
+      <div class="page"><img src="PAGINA34.jpg" alt="Página 34" class="zoomable"></div>
+      <div class="page"><img src="PAGINA35.jpg" alt="Página 35" class="zoomable"></div>
+      <div class="page"><img src="PAGINA36.jpg" alt="Página 36" class="zoomable"></div>
+      <div class="page"><img src="PAGINA37.jpg" alt="Página 37" class="zoomable"></div>
       
     </div>
   </div>
@@ -694,17 +693,21 @@
 
     document.addEventListener('DOMContentLoaded', function() {
       const screenWidth = window.innerWidth;
-      const initialSize = screenWidth < 550 ? Math.min(screenWidth - 40, 480) : 500;
+      
+      // Proporción carta (Letter aspect ratio: 8.5 x 11 -> 1 : 1.294)
+      const baseWidth = screenWidth < 550 ? Math.min(screenWidth - 30, 420) : 450;
+      const baseHeight = Math.round(baseWidth * 1.294); 
+
       const flipbookElem = document.getElementById('flipbook');
 
       pageFlip = new St.PageFlip(flipbookElem, {
-        width: initialSize,
-        height: initialSize,
+        width: baseWidth,
+        height: baseHeight,
         size: 'stretch',
         minWidth: 280,
-        maxWidth: 600,
-        minHeight: 280,
-        maxHeight: 600,
+        maxWidth: 550,
+        minHeight: 362,
+        maxHeight: 712,
         drawShadow: true,
         showCover: false,
         usePortrait: true,
