@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Catálogo Materas de Cemento | Rocks & Roots</title>
+  <title>Catálogo Materas de Cemento — Edición Navideña | Rocks & Roots</title>
 
   <!-- FAVICON -->
   <link rel="icon" type="image/png" href="favicon.png">
@@ -18,41 +18,43 @@
 
   <!-- ETIQUETAS OPEN GRAPH -->
   <meta property="og:type" content="website">
-  <meta property="og:title" content="Catálogo Materas de Cemento | Rocks & Roots">
-  <meta property="og:description" content="Explora nuestro catálogo interactivo de materas de cemento y diseño botánico.">
+  <meta property="og:title" content="Catálogo Materas de Cemento — Edición Navideña | Rocks & Roots">
+  <meta property="og:description" content="Explora nuestra edición especial navideña de materas de cemento y diseño botánico.">
   <meta property="og:image" content="https://hmackleyn.github.io/CATALOGOR-R-2026/BANNER.png">
   <meta property="og:image:width" content="1200">
   <meta property="og:image:height" content="630">
   
   <style>
     /* =========================================================
-       PANEL DE EDICIÓN DE COLORES - HALLOWEEN BOTÁNICO SUAVE
+       PANEL DE EDICIÓN DE COLORES - NAVIDAD BOTÁNICA SOBRIA
        ========================================================= */
     :root {
-      /* Colores del Fondo Animado */
-      --color-fondo-1: #F5F2EB; 
-      --color-fondo-2: #EBE5DB; 
-      --color-fondo-3: #E3DDD3; 
-      --color-fondo-4: #F0EAE1; 
+      /* Fondo Animado Festivo (Nieve suave, Beige cálido y Pino Helado) */
+      --color-fondo-1: #F4F6F4; 
+      --color-fondo-2: #E8EFEA; 
+      --color-fondo-3: #DFE8E2; 
+      --color-fondo-4: #EBF1EC; 
       
-      /* Marca y Botones Principal */
-      --brand-green: #68745d;       
-      --brand-green-hover: #54604a; 
-      --accent-terracota: #D9825B;  
+      /* Identidad Navideña Rocks & Roots */
+      --brand-pine: #2D4336;          /* Verde Pino Navideño Profundo */
+      --brand-pine-hover: #1F3026;    /* Verde Pino Oscuro Hover */
+      --accent-crimson: #9E2A2B;     /* Rojo Borgoña / Muérdago Elegante */
+      --accent-crimson-hover: #801E20;
+      --accent-gold: #C5A059;        /* Dorado Oro Cálido Botánico */
 
-      /* Header y Elementos */
-      --bg-header: rgba(235, 229, 219, 0.92); 
-      --borde-header: rgba(104, 116, 93, 0.20); 
+      /* Header y Separaciones */
+      --bg-header: rgba(244, 246, 244, 0.94); 
+      --borde-header: rgba(45, 67, 54, 0.15); 
       
       /* Textos */
-      --color-titulo-principal: #5a6452; 
-      --color-subtitulo-revista: #a27255; 
-      --text-dark: #5c5550;               
+      --color-titulo-principal: #2D4336; 
+      --color-subtitulo-revista: #9E2A2B; 
+      --text-dark: #3E4A42;               
 
-      /* Footer e Iconos */
-      --bg-footer: rgba(227, 221, 211, 0.95);
+      /* Footer */
+      --bg-footer: rgba(232, 239, 234, 0.96);
       --bg-social-icon: #ffffff;           
-      --color-social-icon: #68745d;        
+      --color-social-icon: #2D4336;        
     }
 
     * {
@@ -71,7 +73,7 @@
       min-height: 100vh;
       font-family: 'Poppins', sans-serif;
       padding-top: 95px;
-      padding-bottom: 20px;
+      padding-bottom: 0; /* Footer fijado al final */
       position: relative;
       overflow-x: hidden;
       color: var(--text-dark);
@@ -83,7 +85,7 @@
       100% { background-position: 0% 50%; }
     }
 
-    /* IMAGEN DE FONDO DE HOJAS CON BLUR */
+    /* IMAGEN DE FONDO BOTÁNICA NAVIDEÑA (Pino / Hojas) */
     body::before {
       content: "";
       position: fixed;
@@ -97,16 +99,16 @@
       background-size: contain;
       pointer-events: none;
       z-index: 0;
-      opacity: 0.12;
-      filter: blur(6px) sepia(0.2) hue-rotate(40deg);
+      opacity: 0.10;
+      filter: blur(4px) sepia(0.3) hue-rotate(90deg);
     }
 
-    .main-header, .header-editorial, .zoom-hint, .flipbook-container, .controls, .main-footer, .modal-overlay {
+    .main-header, .catalog-section, .main-footer, .modal-overlay {
       position: relative;
       z-index: 1;
     }
 
-    /* ================= HEADER FIJO SUPERIOR ================= */
+    /* ================= HEADER FIJO SUPERIOR (SEPARADO) ================= */
     .main-header {
       position: fixed;
       top: 0;
@@ -119,7 +121,7 @@
       grid-template-columns: 1fr auto 1fr;
       align-items: center;
       padding: 0 40px;
-      box-shadow: 0 2px 15px rgba(0, 0, 0, 0.05);
+      box-shadow: 0 2px 15px rgba(45, 67, 54, 0.08);
       z-index: 100;
       border-bottom: 1px solid var(--borde-header);
     }
@@ -131,7 +133,7 @@
     .logo-header-img { height: 42px; width: auto; object-fit: contain; }
 
     .btn-cotizar {
-      background: var(--brand-green);
+      background: var(--accent-crimson);
       color: #ffffff;
       border: none;
       padding: 9px 22px;
@@ -142,13 +144,13 @@
       cursor: pointer;
       text-decoration: none;
       transition: all 0.2s ease;
-      box-shadow: 0 4px 12px rgba(104, 116, 93, 0.2);
+      box-shadow: 0 4px 12px rgba(158, 42, 43, 0.25);
     }
 
     .btn-cotizar:hover {
-      background: var(--brand-green-hover);
+      background: var(--accent-crimson-hover);
       transform: translateY(-1px);
-      box-shadow: 0 6px 16px rgba(104, 116, 93, 0.3);
+      box-shadow: 0 6px 16px rgba(158, 42, 43, 0.35);
     }
 
     /* MENÚ DESPLEGABLE */
@@ -159,7 +161,7 @@
       border: none;
       font-size: 0.85rem;
       font-weight: 600;
-      color: var(--brand-green);
+      color: var(--brand-pine);
       cursor: pointer;
       display: flex;
       align-items: center;
@@ -176,10 +178,10 @@
       top: 100%;
       background-color: #ffffff;
       min-width: 200px;
-      box-shadow: 0 10px 28px rgba(0, 0, 0, 0.08);
+      box-shadow: 0 10px 28px rgba(0, 0, 0, 0.1);
       border-radius: 12px;
       overflow: hidden;
-      border: 1px solid rgba(104, 116, 93, 0.15);
+      border: 1px solid rgba(45, 67, 54, 0.15);
       z-index: 110;
     }
 
@@ -195,15 +197,25 @@
 
     .dropdown-content a:hover {
       background-color: var(--color-fondo-1);
-      color: var(--brand-green);
+      color: var(--accent-crimson);
     }
 
     .nav-menu:hover .dropdown-content { display: block; }
 
-    /* ================= ENCABEZADO EDITORIAL ================= */
+    /* ================= SECCIÓN CENTRAL: CATÁLOGO ================= */
+    .catalog-section {
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 10px 15px 40px 15px;
+      flex-grow: 1;
+    }
+
+    /* ENCABEZADO EDITORIAL NAVIDEÑO */
     .header-editorial {
       text-align: center;
-      margin-bottom: 12px;
+      margin-bottom: 14px;
       display: flex;
       flex-direction: column;
       align-items: center;
@@ -218,8 +230,8 @@
 
     .badge-icon {
       font-size: 0.95rem;
-      color: var(--accent-terracota);
-      opacity: 0.85;
+      color: var(--accent-gold);
+      opacity: 0.9;
     }
 
     .badge-icon.left { transform: rotate(-15deg); }
@@ -227,15 +239,15 @@
 
     .season-badge {
       background-color: #ffffff;
-      color: var(--accent-terracota);
-      font-size: 0.72rem;
+      color: var(--accent-crimson);
+      font-size: 0.75rem;
       font-weight: 700;
       letter-spacing: 2px;
       text-transform: uppercase;
-      padding: 6px 18px;
+      padding: 6px 20px;
       border-radius: 20px;
-      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.04);
-      border: 1px solid rgba(217, 130, 91, 0.25);
+      box-shadow: 0 4px 14px rgba(158, 42, 43, 0.12);
+      border: 1px solid rgba(197, 160, 89, 0.4);
       display: flex;
       align-items: center;
       gap: 8px;
@@ -260,8 +272,8 @@
     }
 
     .magazine-title .title-sub {
-      font-size: 0.85rem;
-      font-weight: 500;
+      font-size: 0.88rem;
+      font-weight: 600;
       letter-spacing: 6px;
       color: var(--color-subtitulo-revista);
       text-transform: uppercase;
@@ -272,37 +284,37 @@
 
     .magazine-title .title-year {
       font-size: 1.8rem;
-      font-weight: 300;
+      font-weight: 400;
       letter-spacing: 10px;
-      color: var(--accent-terracota);
+      color: var(--accent-gold);
       margin-right: -10px;
     }
 
     .zoom-hint {
-      color: #7a726c;
+      color: #617066;
       font-size: 0.8rem;
-      margin-bottom: 18px;
+      margin-bottom: 20px;
       text-align: center;
       font-weight: 500;
     }
 
-    /* ================= FLIPBOOK (AJUSTADO A TAMAÑO CARTA VERTICAL) ================= */
+    /* FLIPBOOK (TAMAÑO CARTA VERTICAL) */
     .flipbook-container {
       display: flex;
       justify-content: center;
       align-items: center;
       width: 100%;
-      max-width: 520px; /* Ancho máximo adaptado a hojas carta */
-      margin-bottom: 22px;
+      max-width: 520px;
+      margin-bottom: 24px;
     }
 
     #flipbook {
-      box-shadow: 0 18px 45px rgba(0, 0, 0, 0.12);
+      box-shadow: 0 20px 50px rgba(45, 67, 54, 0.18);
       border-radius: 8px;
       overflow: hidden;
       touch-action: pan-y;
       background-color: #ffffff;
-      aspect-ratio: 1 / 1.294; /* Proporción 8.5" x 11" (Carta) */
+      aspect-ratio: 1 / 1.294;
       width: 100%;
     }
 
@@ -316,7 +328,7 @@
     .page img {
       width: 100%;
       height: 100%;
-      object-fit: cover; /* Cubre completamente el área sin deformar */
+      object-fit: cover;
       display: block;
       cursor: pointer;
     }
@@ -328,27 +340,27 @@
       z-index: 10;
     }
 
-    /* CONTROLES */
+    /* CONTROLES DEL FLIPBOOK */
     .controls {
       display: flex;
       justify-content: center;
       align-items: center;
       gap: 16px;
       width: 100%;
-      margin-bottom: 22px;
+      margin-bottom: 28px;
     }
 
     .btn {
-      background: var(--brand-green);
+      background: var(--brand-pine);
       color: #ffffff;
-      border: none;
+      border: 1px solid rgba(197, 160, 89, 0.3);
       padding: 10px 24px;
       border-radius: 25px;
       font-weight: 600;
       font-size: 0.88rem;
       font-family: 'Poppins', sans-serif;
       cursor: pointer;
-      box-shadow: 0 4px 14px rgba(0, 0, 0, 0.08);
+      box-shadow: 0 4px 14px rgba(45, 67, 54, 0.15);
       transition: all 0.2s ease;
       display: flex;
       align-items: center;
@@ -356,9 +368,58 @@
     }
 
     .btn:hover {
-      background: var(--brand-green-hover);
+      background: var(--brand-pine-hover);
       transform: translateY(-2px);
-      box-shadow: 0 6px 18px rgba(0, 0, 0, 0.14);
+      box-shadow: 0 6px 18px rgba(45, 67, 54, 0.25);
+    }
+
+    /* ================= BOTÓN DESTACADO: CATÁLOGO DE PLANTAS ================= */
+    .plant-catalog-cta {
+      margin-top: 10px;
+      margin-bottom: 15px;
+      text-align: center;
+    }
+
+    .btn-plantas-destacado {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 12px;
+      background: linear-gradient(135deg, var(--brand-pine) 0%, #1A2B22 100%);
+      color: #ffffff;
+      font-size: 0.95rem;
+      font-weight: 700;
+      letter-spacing: 0.5px;
+      padding: 16px 32px;
+      border-radius: 35px;
+      text-decoration: none;
+      box-shadow: 0 8px 24px rgba(45, 67, 54, 0.28);
+      border: 2px solid var(--accent-gold);
+      transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+      animation: pulseGold 3s infinite ease-in-out;
+    }
+
+    .btn-plantas-destacado i {
+      font-size: 1.2rem;
+      color: var(--accent-gold);
+      transition: transform 0.3s ease;
+    }
+
+    .btn-plantas-destacado:hover {
+      transform: translateY(-3px) scale(1.03);
+      box-shadow: 0 12px 30px rgba(45, 67, 54, 0.38);
+      background: linear-gradient(135deg, var(--accent-crimson) 0%, #7A1D1F 100%);
+      border-color: #ffffff;
+    }
+
+    .btn-plantas-destacado:hover i {
+      transform: rotate(20deg) scale(1.1);
+      color: #ffffff;
+    }
+
+    @keyframes pulseGold {
+      0%, 100% { box-shadow: 0 8px 24px rgba(45, 67, 54, 0.28); }
+      50% { box-shadow: 0 8px 28px rgba(197, 160, 89, 0.55); }
     }
 
     /* ================= MODAL DE COTIZACIÓN ================= */
@@ -366,8 +427,8 @@
       display: none;
       position: fixed;
       top: 0; left: 0; width: 100%; height: 100%;
-      background: rgba(60, 55, 50, 0.45);
-      backdrop-filter: blur(5px);
+      background: rgba(30, 40, 34, 0.55);
+      backdrop-filter: blur(6px);
       z-index: 200;
       justify-content: center;
       align-items: center;
@@ -381,8 +442,8 @@
       width: 100%;
       max-width: 420px;
       position: relative;
-      box-shadow: 0 15px 35px rgba(0, 0, 0, 0.12);
-      border: 1px solid rgba(104, 116, 93, 0.15);
+      box-shadow: 0 15px 35px rgba(0, 0, 0, 0.15);
+      border: 1px solid rgba(197, 160, 89, 0.3);
     }
 
     .modal-close {
@@ -399,16 +460,16 @@
     .form-group { margin-bottom: 14px; text-align: left; }
     .form-group label { display: block; font-size: 0.8rem; font-weight: 600; margin-bottom: 5px; color: var(--text-dark); }
     .form-group input, .form-group textarea {
-      width: 100%; padding: 10px 12px; border: 1px solid #DCD3C7; border-radius: 8px; font-family: 'Poppins', sans-serif; font-size: 0.88rem;
+      width: 100%; padding: 10px 12px; border: 1px solid #C8D4CB; border-radius: 8px; font-family: 'Poppins', sans-serif; font-size: 0.88rem;
       outline: none; transition: border-color 0.2s; background: var(--color-fondo-1); color: var(--text-dark);
     }
-    .form-group input:focus, .form-group textarea:focus { border-color: var(--brand-green); background: #ffffff; }
+    .form-group input:focus, .form-group textarea:focus { border-color: var(--brand-pine); background: #ffffff; }
 
     .btn-submit {
       width: 100%;
-      background: var(--brand-green);
+      background: var(--brand-pine);
       color: #ffffff;
-      border: none;
+      border: 1px solid var(--accent-gold);
       padding: 12px;
       border-radius: 8px;
       font-weight: 600;
@@ -419,20 +480,20 @@
       transition: background 0.2s;
     }
 
-    .btn-submit:hover { background: var(--brand-green-hover); }
+    .btn-submit:hover { background: var(--brand-pine-hover); }
 
-    /* ================= FOOTER ================= */
+    /* ================= FOOTER (SEPARADO) ================= */
     .main-footer {
       width: 100%;
       margin-top: auto;
-      padding: 20px;
+      padding: 24px 20px;
       text-align: center;
       background: var(--bg-footer);
       display: flex;
       flex-direction: column;
       align-items: center;
       gap: 14px;
-      border-top: 1px solid rgba(104, 116, 93, 0.12);
+      border-top: 1px solid rgba(45, 67, 54, 0.12);
     }
 
     .bottom-image-container {
@@ -467,16 +528,16 @@
       align-items: center;
       font-size: 1.2rem;
       text-decoration: none;
-      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
-      border: 1px solid rgba(104, 116, 93, 0.15);
+      box-shadow: 0 4px 12px rgba(45, 67, 54, 0.08);
+      border: 1px solid rgba(197, 160, 89, 0.3);
       transition: all 0.2s ease;
     }
 
     .social-icon:hover {
-      background-color: var(--brand-green);
+      background-color: var(--accent-crimson);
       color: #ffffff;
       transform: translateY(-3px);
-      box-shadow: 0 6px 16px rgba(0, 0, 0, 0.12);
+      box-shadow: 0 6px 16px rgba(158, 42, 43, 0.25);
     }
 
     /* BOTÓN FLOTANTE WHATSAPP */
@@ -516,13 +577,14 @@
 
     @media (max-width: 600px) {
       .main-header { padding: 0 15px; height: 65px; }
-      body { padding-top: 80px; }
+      body { padding-top: 75px; }
       .logo-header-img { height: 32px; }
       .btn-cotizar { padding: 7px 14px; font-size: 0.72rem; }
       .menu-btn { font-size: 0.78rem; padding: 6px 8px; }
       .magazine-title .title-main { font-size: 2.1rem; letter-spacing: 8px; }
       .magazine-title .title-sub { font-size: 0.72rem; letter-spacing: 4px; }
       .magazine-title .title-year { font-size: 1.4rem; letter-spacing: 6px; }
+      .btn-plantas-destacado { font-size: 0.82rem; padding: 13px 22px; width: 90%; }
       .bottom-image-container { max-width: 150px; }
       .btn { padding: 9px 20px; font-size: 0.85rem; }
       .whatsapp-btn { width: 50px; height: 50px; font-size: 1.6rem; bottom: 18px; right: 18px; }
@@ -531,7 +593,7 @@
 </head>
 <body>
 
-  <!-- HEADER NAVEGABLE FIJO -->
+  <!-- HEADER NAVEGABLE FIJO (SEPARADO) -->
   <header class="main-header">
     <div class="header-left">
       <a href="#" class="btn-cotizar" id="openModal">COTIZAR</a>
@@ -546,7 +608,7 @@
         <button class="menu-btn">ESTILOS <i class="fa-solid fa-chevron-down"></i></button>
         <div class="dropdown-content">
           <a href="#" onclick="goFastToPage(6); return false;">Gota</a>
-          <a href="#" onclick="goFastToPage(9 ); return false;">Bong</a>
+          <a href="#" onclick="goFastToPage(9); return false;">Bong</a>
           <a href="#" onclick="goFastToPage(12); return false;">Pott</a>
           <a href="#" onclick="goFastToPage(15); return false;">Cilíndro</a>
           <a href="#" onclick="goFastToPage(20); return false;">Cónica</a>
@@ -560,89 +622,101 @@
     </div>
   </header>
 
-  <!-- CABECERA EDITORIAL TIPO REVISTA EN TEXTO REAL -->
-  <header class="header-editorial">
-    <div class="season-badge-wrapper">
-      <i class="fa-solid fa-leaf badge-icon left"></i>
-      <div class="season-badge">
-        <i class="fa-solid fa-pumpkin"></i> Edición Especial Halloween
-      </div>
-      <i class="fa-solid fa-leaf badge-icon right"></i>
-    </div>
-
-    <div class="magazine-title">
-      <span class="title-main">CATÁLOGO</span>
-      <span class="title-sub">Materas de Cemento</span>
-      <span class="title-year">2026</span>
-    </div>
-  </header>
-
-  <p class="zoom-hint">🔍 Haz doble clic / toque para ver la imagen completa</p>
-
-  <!-- FLIPBOOK CON TODAS LAS PÁGINAS (1 A 37) -->
-  <div class="flipbook-container">
-    <div id="flipbook">
-      
-      <div class="page"><img src="PAGINA.jpg" alt="Portada" class="zoomable"></div>
-      
-      <div class="page">
-        <img src="PAGINA2.jpg" alt="Página 2" class="zoomable">
-        <div class="index-link" style="top: 30%; left: 10%; width: 80%; height: 8%;" data-page="1" title="Ir a Línea Gota"></div>
-        <div class="index-link" style="top: 40%; left: 10%; width: 80%; height: 8%;" data-page="5" title="Ir a Materas Redondas"></div>
+  <!-- SECCIÓN PRINCIPAL DEL CATÁLOGO -->
+  <main class="catalog-section">
+    
+    <!-- ENCABEZADO EDITORIAL NAVIDEÑO -->
+    <header class="header-editorial">
+      <div class="season-badge-wrapper">
+        <i class="fa-solid fa-holly-berry badge-icon left"></i>
+        <div class="season-badge">
+          <i class="fa-solid fa-snowflake"></i> Edición Especial Navideña
+        </div>
+        <i class="fa-solid fa-holly-berry badge-icon right"></i>
       </div>
 
-      <div class="page"><img src="PAGINA3.jpg" alt="Página 3" class="zoomable"></div>
-      <div class="page"><img src="PAGINA4.jpg" alt="Página 4" class="zoomable"></div>
-      <div class="page"><img src="PAGINA5.jpg" alt="Página 5" class="zoomable"></div>
-      <div class="page"><img src="PAGINA6.jpg" alt="Página 6" class="zoomable"></div>
-      <div class="page"><img src="PAGINA7.jpg" alt="Página 7" class="zoomable"></div>
-      <div class="page"><img src="PAGINA8.jpg" alt="Página 8" class="zoomable"></div>
-      <div class="page"><img src="PAGINA9.jpg" alt="Página 9" class="zoomable"></div>
-      <div class="page"><img src="PAGINA10.jpg" alt="Página 10" class="zoomable"></div>
-      <div class="page"><img src="PAGINA11.jpg" alt="Página 11" class="zoomable"></div>
-      <div class="page"><img src="PAGINA12.jpg" alt="Página 12" class="zoomable"></div>
-      <div class="page"><img src="PAGINA13.jpg" alt="Página 13" class="zoomable"></div>
-      <div class="page"><img src="PAGINA14.jpg" alt="Página 14" class="zoomable"></div>
-      <div class="page"><img src="PAGINA15.jpg" alt="Página 15" class="zoomable"></div>
-      <div class="page"><img src="PAGINA16.jpg" alt="Página 16" class="zoomable"></div>
-      <div class="page"><img src="PAGINA17.jpg" alt="Página 17" class="zoomable"></div>
-      <div class="page"><img src="PAGINA18.jpg" alt="Página 18" class="zoomable"></div>
-      <div class="page"><img src="PAGINA19.jpg" alt="Página 19" class="zoomable"></div>
-      <div class="page"><img src="PAGINA20.jpg" alt="Página 20" class="zoomable"></div>
-      <div class="page"><img src="PAGINA21.jpg" alt="Página 21" class="zoomable"></div>
-      <div class="page"><img src="PAGINA22.jpg" alt="Página 22" class="zoomable"></div>
-      <div class="page"><img src="PAGINA23.jpg" alt="Página 23" class="zoomable"></div>
-      <div class="page"><img src="PAGINA24.jpg" alt="Página 24" class="zoomable"></div>
-      <div class="page"><img src="PAGINA25.jpg" alt="Página 25" class="zoomable"></div>
-      <div class="page"><img src="PAGINA26.jpg" alt="Página 26" class="zoomable"></div>
-      <div class="page"><img src="PAGINA27.jpg" alt="Página 27" class="zoomable"></div>
-      <div class="page"><img src="PAGINA28.jpg" alt="Página 28" class="zoomable"></div>
-      <div class="page"><img src="PAGINA29.jpg" alt="Página 29" class="zoomable"></div>
-      <div class="page"><img src="PAGINA30.jpg" alt="Página 30" class="zoomable"></div>
-      <div class="page"><img src="PAGINA31.jpg" alt="Página 31" class="zoomable"></div>
-      <div class="page"><img src="PAGINA32.jpg" alt="Página 32" class="zoomable"></div>
-      <div class="page"><img src="PAGINA33.jpg" alt="Página 33" class="zoomable"></div>
-      <div class="page"><img src="PAGINA34.jpg" alt="Página 34" class="zoomable"></div>
-      <div class="page"><img src="PAGINA35.jpg" alt="Página 35" class="zoomable"></div>
-      <div class="page"><img src="PAGINA36.jpg" alt="Página 36" class="zoomable"></div>
-      <div class="page"><img src="PAGINA37.jpg" alt="Página 37" class="zoomable"></div>
-      <div class="page"><img src="PAGINA38.jpg" alt="Página 38" class="zoomable"></div>
-      <div class="page"><img src="PAGINA39.jpg" alt="Página 39" class="zoomable"></div>
-      
-    </div>
-  </div>
+      <div class="magazine-title">
+        <span class="title-main">CATÁLOGO</span>
+        <span class="title-sub">Materas de Cemento</span>
+        <span class="title-year">2026</span>
+      </div>
+    </header>
 
-  <!-- CONTROLES DE NAVEGACIÓN -->
-  <div class="controls">
-    <button class="btn" id="prev">❮ Anterior</button>
-    <button class="btn" id="next">Siguiente ❯</button>
-  </div>
+    <p class="zoom-hint">🔍 Haz doble clic / toque para ver la imagen completa</p>
+
+    <!-- FLIPBOOK CON PÁGINAS -->
+    <div class="flipbook-container">
+      <div id="flipbook">
+        
+        <div class="page"><img src="PAGINA.jpg" alt="Portada" class="zoomable"></div>
+        
+        <div class="page">
+          <img src="PAGINA2.jpg" alt="Página 2" class="zoomable">
+          <div class="index-link" style="top: 30%; left: 10%; width: 80%; height: 8%;" data-page="1" title="Ir a Línea Gota"></div>
+          <div class="index-link" style="top: 40%; left: 10%; width: 80%; height: 8%;" data-page="5" title="Ir a Materas Redondas"></div>
+        </div>
+
+        <div class="page"><img src="PAGINA3.jpg" alt="Página 3" class="zoomable"></div>
+        <div class="page"><img src="PAGINA4.jpg" alt="Página 4" class="zoomable"></div>
+        <div class="page"><img src="PAGINA5.jpg" alt="Página 5" class="zoomable"></div>
+        <div class="page"><img src="PAGINA6.jpg" alt="Página 6" class="zoomable"></div>
+        <div class="page"><img src="PAGINA7.jpg" alt="Página 7" class="zoomable"></div>
+        <div class="page"><img src="PAGINA8.jpg" alt="Página 8" class="zoomable"></div>
+        <div class="page"><img src="PAGINA9.jpg" alt="Página 9" class="zoomable"></div>
+        <div class="page"><img src="PAGINA10.jpg" alt="Página 10" class="zoomable"></div>
+        <div class="page"><img src="PAGINA11.jpg" alt="Página 11" class="zoomable"></div>
+        <div class="page"><img src="PAGINA12.jpg" alt="Página 12" class="zoomable"></div>
+        <div class="page"><img src="PAGINA13.jpg" alt="Página 13" class="zoomable"></div>
+        <div class="page"><img src="PAGINA14.jpg" alt="Página 14" class="zoomable"></div>
+        <div class="page"><img src="PAGINA15.jpg" alt="Página 15" class="zoomable"></div>
+        <div class="page"><img src="PAGINA16.jpg" alt="Página 16" class="zoomable"></div>
+        <div class="page"><img src="PAGINA17.jpg" alt="Página 17" class="zoomable"></div>
+        <div class="page"><img src="PAGINA18.jpg" alt="Página 18" class="zoomable"></div>
+        <div class="page"><img src="PAGINA19.jpg" alt="Página 19" class="zoomable"></div>
+        <div class="page"><img src="PAGINA20.jpg" alt="Página 20" class="zoomable"></div>
+        <div class="page"><img src="PAGINA21.jpg" alt="Página 21" class="zoomable"></div>
+        <div class="page"><img src="PAGINA22.jpg" alt="Página 22" class="zoomable"></div>
+        <div class="page"><img src="PAGINA23.jpg" alt="Página 23" class="zoomable"></div>
+        <div class="page"><img src="PAGINA24.jpg" alt="Página 24" class="zoomable"></div>
+        <div class="page"><img src="PAGINA25.jpg" alt="Página 25" class="zoomable"></div>
+        <div class="page"><img src="PAGINA26.jpg" alt="Página 26" class="zoomable"></div>
+        <div class="page"><img src="PAGINA27.jpg" alt="Página 27" class="zoomable"></div>
+        <div class="page"><img src="PAGINA28.jpg" alt="Página 28" class="zoomable"></div>
+        <div class="page"><img src="PAGINA29.jpg" alt="Página 29" class="zoomable"></div>
+        <div class="page"><img src="PAGINA30.jpg" alt="Página 30" class="zoomable"></div>
+        <div class="page"><img src="PAGINA31.jpg" alt="Página 31" class="zoomable"></div>
+        <div class="page"><img src="PAGINA32.jpg" alt="Página 32" class="zoomable"></div>
+        <div class="page"><img src="PAGINA33.jpg" alt="Página 33" class="zoomable"></div>
+        <div class="page"><img src="PAGINA34.jpg" alt="Página 34" class="zoomable"></div>
+        <div class="page"><img src="PAGINA35.jpg" alt="Página 35" class="zoomable"></div>
+        <div class="page"><img src="PAGINA36.jpg" alt="Página 36" class="zoomable"></div>
+        <div class="page"><img src="PAGINA37.jpg" alt="Página 37" class="zoomable"></div>
+        <div class="page"><img src="PAGINA38.jpg" alt="Página 38" class="zoomable"></div>
+        <div class="page"><img src="PAGINA39.jpg" alt="Página 39" class="zoomable"></div>
+        
+      </div>
+    </div>
+
+    <!-- CONTROLES DE NAVEGACIÓN -->
+    <div class="controls">
+      <button class="btn" id="prev">❮ Anterior</button>
+      <button class="btn" id="next">Siguiente ❯</button>
+    </div>
+
+    <!-- BOTÓN DESTACADO AL CATÁLOGO DE PLANTAS -->
+    <div class="plant-catalog-cta">
+      <a href="https://hmackleyn.github.io/CATALOGO-PLANTAS/" target="_blank" class="btn-plantas-destacado">
+        <i class="fa-solid fa-seedling"></i> Para ver nuestro catálogo de plantas da clic aquí
+      </a>
+    </div>
+
+  </main>
 
   <!-- MODAL DE COTIZACIÓN -->
   <div class="modal-overlay" id="cotizarModal">
     <div class="modal-content">
       <span class="modal-close" id="closeModal">&times;</span>
-      <h3 style="margin-bottom: 15px; color: var(--brand-green); text-align: center; font-weight: 700;">Solicitar Cotización</h3>
+      <h3 style="margin-bottom: 15px; color: var(--brand-pine); text-align: center; font-weight: 700;">Solicitar Cotización Navideña</h3>
       
       <form action="https://formspree.io/f/TU_FORM_ID" method="POST">
         <div class="form-group">
@@ -666,7 +740,7 @@
     </div>
   </div>
 
-  <!-- FOOTER -->
+  <!-- FOOTER (SEPARADO) -->
   <footer class="main-footer">
     <div class="bottom-image-container">
       <img src="LOGOFINAL2.png" alt="Información adicional Rocks & Roots" class="bottom-img">
@@ -684,7 +758,7 @@
       </a>
     </div>
 
-    <p style="font-size: 0.75rem; color: #7a726c; margin-top: 4px;">© 2026 Rocks & Roots — Todos los derechos reservados.</p>
+    <p style="font-size: 0.75rem; color: #617066; margin-top: 4px;">© 2026 Rocks & Roots — Todos los derechos reservados.</p>
   </footer>
 
   <!-- BOTÓN FLOTANTE WHATSAPP -->
@@ -701,7 +775,7 @@
     document.addEventListener('DOMContentLoaded', function() {
       const screenWidth = window.innerWidth;
       
-      // Proporción carta (Letter aspect ratio: 8.5 x 11 -> 1 : 1.294)
+      // Proporción Carta (8.5 x 11 -> 1 : 1.294)
       const baseWidth = screenWidth < 550 ? Math.min(screenWidth - 30, 420) : 450;
       const baseHeight = Math.round(baseWidth * 1.294); 
 
